@@ -11,10 +11,12 @@ IS_DEBUG = True
 # Define the app
 app = Flask(__name__)
 
-# Routes
+# ---------------------------------------------------
+# Index page
+# ---------------------------------------------------
 @app.route('/')
 @app.route("/index")
-# Function for the index page
+@app.route("/home")
 def index():
 
     user_A = {"username": "Peggy"}
@@ -35,6 +37,20 @@ def index():
     return render_template("index.html",
                            username=user_A["username"],
                            posts=posts)
+
+# ---------------------------------------------------
+# Login page
+# ---------------------------------------------------
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+# ---------------------------------------------------
+# Profile page
+# ---------------------------------------------------
+@app.route("user/<username>")
+def profile(username):
+    return render_template("profile.html")
 
 
 if __name__ == "__main__":
