@@ -18,7 +18,3 @@ The master branch will then consistently contain the project in the latest appro
 *For more details on the workflow of commits, please go to:*
 
 https://innerjoiner.com/guide/git-team-workflow-cheatsheet/
-
-### New to Git?
-
-![Git Cheat Sheet](https://qph.fs.quoracdn.net/main-qimg-71fc6274c2c4c1f3f183cceea0c2d169)
