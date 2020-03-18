@@ -11,7 +11,9 @@ IS_DEBUG = True
 # Define the app
 app = Flask(__name__)
 
-# Routes
+# ---------------------------------------------------
+# Index page
+# ---------------------------------------------------
 @app.route('/')
 @app.route("/index")
 # Function for the index page
