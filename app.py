@@ -11,11 +11,30 @@ IS_DEBUG = True
 # Define the app
 app = Flask(__name__)
 
-# Decorator for the routing
+# Routes
 @app.route('/')
+@app.route("/index")
 # Function for the index page
 def index():
-    return render_template("index.html")
+
+    user_A = {"username": "Peggy"}
+
+    user_B = {"username": "Lolo"}
+
+    posts = [
+        {
+            "author": user_A,
+            "body": "Hello I am Peggy."
+        },
+        {
+            "author": user_B,
+            "body": "Hello I am user Lolo."
+        }
+    ]
+
+    return render_template("index.html",
+                           username=user_A["username"],
+                           posts=posts)
 
 
 if __name__ == "__main__":
