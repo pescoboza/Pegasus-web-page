@@ -5,10 +5,6 @@ from flask import Flask, render_template, request
 # Metaparameters
 # ---------------------------------------------------
 IS_DEBUG = True
-
-INDEX_HTML_PATH = "templates/"
-
-
 # ---------------------------------------------------
 
 
@@ -16,8 +12,6 @@ INDEX_HTML_PATH = "templates/"
 app = Flask(__name__)
 
 # Decorator for the routing
-
-
 @app.route('/')
 # Function for the index page
 def index():
