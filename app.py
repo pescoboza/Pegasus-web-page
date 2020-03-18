@@ -36,6 +36,20 @@ def index():
                            username=user_A["username"],
                            posts=posts)
 
+# ---------------------------------------------------
+# Login page
+# ---------------------------------------------------
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+# ---------------------------------------------------
+# Profile page
+# ---------------------------------------------------
+@app.route("user/<username>")
+def profile(username):
+    return render_template("profile.html")
+
 
 if __name__ == "__main__":
     app.debug = IS_DEBUG
