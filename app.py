@@ -16,6 +16,7 @@ app = Flask(__name__)
 # ---------------------------------------------------
 @app.route('/')
 @app.route("/index")
+@app.route("/home")
 # Function for the index page
 def index():
 
