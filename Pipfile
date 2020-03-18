@@ -7,8 +7,9 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-psycopg3 = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
+flask-sqlalchemy = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
