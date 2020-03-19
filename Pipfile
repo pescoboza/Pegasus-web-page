@@ -12,6 +12,7 @@ flask = "*"
 psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.7"

@@ -1,5 +1,5 @@
 # Import what we'll be using from the flask framework
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, request
 
 
 # Metaparameters
@@ -46,6 +46,29 @@ def login():
     return render_template("login.html")
 
 # ---------------------------------------------------
+# Login request page
+# ---------------------------------------------------
+@app.route("/login_success", methods=["GET", "POST"])
+def login_submit():
+    # POST: login user
+    if request.method == "POST":
+        # Get for fields
+        username = request.form.get("username")
+        password = request.form.get("password")
+        remember_me = request.form.get("checked")
+
+        # TODO: Query for valid user
+        valid_credentials = True
+        if not valid_credentials:
+            # TODO: Add failed login message
+            return render_template("login.html", failed_login=True)
+
+        print(username, password, remember_me)
+
+    return render_template("login_success.html")
+
+
+# ---------------------------------------------------
 # Profile page
 # ---------------------------------------------------
 @app.route("/user/<username>")
@@ -54,5 +77,5 @@ def profile(username):
 
 
 if __name__ == "__main__":
-    app.debug = IS_DEBUG
+    app.debug = True  # Remember to change debug mode
     app.run()
