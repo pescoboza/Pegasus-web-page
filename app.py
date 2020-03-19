@@ -1,15 +1,11 @@
-# Import what we'll be using from the flask framework
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 
 
-# Metaparameters
-# ---------------------------------------------------
-IS_DEBUG = True
-# ---------------------------------------------------
-
-
-# Define the app
 app = Flask(__name__)
+
+# TODO: Add safer secret key
+app.config["SECRET_KEY"] = "pegasus-dev-team"
+
 
 # ---------------------------------------------------
 # Index page
@@ -19,53 +15,51 @@ app = Flask(__name__)
 @app.route("/home")
 def index():
 
-    user_A = {"username": "Peggy"}
 
-    user_B = {"username": "Lolo"}
+git add .
+user_A = {"username": "Peggy"}
 
-    posts = [
-        {
-            "author": user_A,
-            "body": "Hello I am Peggy."
-        },
-        {
-            "author": user_B,
-            "body": "Hello I am user Lolo."
-        }
-    ]
+user_B = {"username": "Lolo"}
 
-    return render_template("index.html",
-                           username=user_A["username"],
-                           posts=posts)
+posts = [
+    {
+        "author": user_A,
+        "body": "Hello I am Peggy."
+    },
+    {
+        "author": user_B,
+        "body": "Hello I am user Lolo."
+    }
+]
+
+return render_template("index.html",
+                       username=user_A["username"],
+                       posts=posts)
 
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
 
-# ---------------------------------------------------
-# Login request page
-# ---------------------------------------------------
-@app.route("/login_success", methods=["GET", "POST"])
-def login_submit():
-    # POST: login user
+    error = None
+
+    user = {
+        "username": "lolo23jhon",
+        "password": "pegasus"
+    }
+
     if request.method == "POST":
-        # Get for fields
-        username = request.form.get("username")
-        password = request.form.get("password")
-        remember_me = request.form.get("checked")
+        username = request.form["username"]
+        password = request.form["password"]
+        print(username, password)
 
-        # TODO: Query for valid user
-        valid_credentials = True
-        if not valid_credentials:
-            # TODO: Add failed login message
-            return render_template("login.html", failed_login=True)
+        # TODO: Change redirection after succesful login
+        return redirect(url_for("index"))
+    else:
+        error = "Invalid Credentials. Please ty again."
 
-        print(username, password, remember_me)
-
-    return render_template("login_success.html")
+    return render_template("login.html", error=error)
 
 
 # ---------------------------------------------------
