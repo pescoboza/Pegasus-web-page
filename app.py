@@ -9,8 +9,10 @@ app = Flask(__name__)
 # Have different database for development and deployment
 ENV = "dev"
 if ENV == "dev":
+    from get_localhost import get_localhost
+    URI = get_localhost()
     app.debug = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://"
+    app.config["SQLALCHEMY_DATABASE_URI"] = URI
 else:
     app.debug = False
     app.config["SQLALCHEMY_DATABASE_URI"] = ""
@@ -28,6 +30,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary=True)
     username = db.Column(db.String(16), unique=True)
     password = db.Column(db.String(32))
+
 
 # ---------------------------------------------------
 # Index page
