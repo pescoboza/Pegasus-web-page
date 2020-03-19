@@ -14,27 +14,7 @@ app.config["SECRET_KEY"] = "pegasus-dev-team"
 @app.route("/index")
 @app.route("/home")
 def index():
-
-
-git add .
-user_A = {"username": "Peggy"}
-
-user_B = {"username": "Lolo"}
-
-posts = [
-    {
-        "author": user_A,
-        "body": "Hello I am Peggy."
-    },
-    {
-        "author": user_B,
-        "body": "Hello I am user Lolo."
-    }
-]
-
-return render_template("index.html",
-                       username=user_A["username"],
-                       posts=posts)
+    return render_template("index.html")
 
 # ---------------------------------------------------
 # Login page
@@ -52,12 +32,12 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        print(username, password)
 
-        # TODO: Change redirection after succesful login
-        return redirect(url_for("index"))
-    else:
-        error = "Invalid Credentials. Please ty again."
+        if username == user["username"] and password == user["password"]:
+            # TODO: Change redirection after succesful login
+            return redirect(url_for("index"))
+        else:
+            error = "Invalid Credentials. Please ty again."
 
     return render_template("login.html", error=error)
 

@@ -4,6 +4,10 @@
 <!-- Change form method -->
 <form action="" method="POST">
     <div class="container">
+        {% if error %}
+        <p class="error">Error: {{error}}</p>
+        {% endif %}
+
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
         <br>
