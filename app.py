@@ -1,11 +1,33 @@
 from flask import Flask, render_template, redirect, request, url_for
-
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+# ---------------------------------------------------
+# Developmen parameters
+# ---------------------------------------------------
+# Have different database for development and deployment
+ENV = "dev"
+if ENV == "dev":
+    app.debug = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://"
+else:
+    app.debug = False
+    app.config["SQLALCHEMY_DATABASE_URI"] = ""
+
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # TODO: Add safer secret key
 app.config["SECRET_KEY"] = "pegasus-dev-team"
 
+db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    __tablename__ = "user"
+    id = db.Column(db.Integer, primary=True)
+    username = db.Column(db.String(16), unique=True)
+    password = db.Column(db.String(32))
 
 # ---------------------------------------------------
 # Index page
@@ -29,6 +51,7 @@ def login():
         "password": "pegasus"
     }
 
+    # TODO: Connect validation to database
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -51,5 +74,4 @@ def profile(username):
 
 
 if __name__ == "__main__":
-    app.debug = True  # Remember to change debug mode
     app.run()
