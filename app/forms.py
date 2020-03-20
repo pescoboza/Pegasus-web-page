@@ -10,4 +10,4 @@ class LoginForm(FlaskForm):
 
     password = PasswordField(label="Password",
                              validators=[Required(), Length(min=8, max=60)], description="feferef")
-    remember_me = BooleanField()
+    remember = BooleanField()
