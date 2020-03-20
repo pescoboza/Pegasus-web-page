@@ -1,36 +1,6 @@
-from flask import Flask, render_template, redirect, request, url_for
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-
-# ---------------------------------------------------
-# Developmen parameters
-# ---------------------------------------------------
-# Have different database for development and deployment
-ENV = "dev"
-if ENV == "dev":
-    from get_localhost import get_localhost
-    URI = get_localhost()
-    app.debug = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = URI
-else:
-    app.debug = False
-    app.config["SQLALCHEMY_DATABASE_URI"] = ""
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-# TODO: Add safer secret key
-app.config["SECRET_KEY"] = "pegasus-dev-team"
-
-db = SQLAlchemy(app)
-
-
-class User(db.Model):
-    __tablename__ = "user"
-    id = db.Column(db.Integer, primary=True)
-    username = db.Column(db.String(16), unique=True)
-    password = db.Column(db.String(32))
-
+from flask import render_template, redirect, request, url_for
+from app import app
+from models import *
 
 # ---------------------------------------------------
 # Index page
@@ -65,7 +35,7 @@ def login():
         else:
             error = "Invalid Credentials. Please ty again."
 
-    return render_template("login.html", error=error)
+    return render_template("auth/login.html", error=error)
 
 
 # ---------------------------------------------------
@@ -76,5 +46,13 @@ def profile(username):
     return render_template("profile.html")
 
 
-if __name__ == "__main__":
-    app.run()
+# ---------------------------------------------------
+# Testing development page
+# ---------------------------------------------------
+@app.route("/dev-all-members")
+def all_members():
+    page = str()
+    line =  "<h1>{}</h1><br>"
+    for i in range(10):
+        page += line.format(i)
+    return page
