@@ -1,7 +1,6 @@
 # NOTE: DO NOT format this file bebause it creates
 # a circular dependency problem with views.py.
 
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import config
