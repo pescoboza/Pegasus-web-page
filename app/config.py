@@ -1,7 +1,10 @@
 def get_localhost():
     uri = str()
-    with open("db-uri.txt", 'r') as f:
-        uri = f.read()
+    try:
+        with open("db-uri.txt", 'r') as f:
+            uri = f.read()
+    except:
+        uri = "bogus//bogus@bogus:1234"
     return uri
 
 

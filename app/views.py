@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, url_for, flash
 from app import app
 from models import *
 from forms import LoginForm
@@ -19,6 +19,9 @@ def index():
 def login():
 
     form = LoginForm()
+
+    if form.validate_on_submit():
+        return redirect(url_for("/home"))
 
     return render_template("auth/login.html", form=form)
     #error = None
