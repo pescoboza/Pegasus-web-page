@@ -1,3 +1,7 @@
+# NOTE: DO NOT format this file bebause it creates
+# a circular dependency problem with views.py.
+
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import config
@@ -22,10 +26,3 @@ from views import *
 
 if __name__ == "__main__":
     app.run()
-
-
-# class User(db.Model):
-#     __tablename__ = "user"
-#     id = db.Column(db.Integer, primary=True)
-#     username = db.Column(db.String(16), unique=True)
-#     password = db.Column(db.String(32))

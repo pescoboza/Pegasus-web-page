@@ -1,5 +1,6 @@
 from flask import render_template, redirect, request, url_for
 from app import app
+from models import *
 
 # ---------------------------------------------------
 # Index page
@@ -43,3 +44,15 @@ def login():
 @app.route("/user/<username>")
 def profile(username):
     return render_template("profile.html")
+
+
+# ---------------------------------------------------
+# Testing development page
+# ---------------------------------------------------
+@app.route("/dev-all-members")
+def all_members():
+    page = str()
+    line =  "<h1>{}</h1><br>"
+    for i in range(10):
+        page += line.format(i)
+    return page
