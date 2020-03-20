@@ -3,6 +3,7 @@
 
 <head>
     <title>Log In</title>
+    <link rel="stylesheet" href="../static/login.css"
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,23 +13,14 @@
     <nav>
         <h1>PEGASUS</h1>
     </nav>
-    <form action="" method="">
+    <form class="box" action="index.html" method="POST">
         <div class="container"> 
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-            <br>
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <br>
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-        <div class="container">
-            <button type="button" class="cancelbtn">Cancel</button>
+            <h1>LogIn</h1>
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <input type="submit" name="" value="Login ">
+            <input type="checkbox" checked="checked" name="remember"> Remember me
             <span class="password">Forgot <a href="#">password?</a></span>
-        </div>
     </form>
 
 </body>
