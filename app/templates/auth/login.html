@@ -3,17 +3,14 @@
 {% block content %}
 <!-- Change form method -->
 <form action="" method="POST">
+    {{form.csrf_token}}
     <div class="container">
-        {% if error %}
-        <p class="error">Error: {{error}}</p>
-        {% endif %}
-
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <label for="username"><b>{{form.username.label}}</b></label>
+        {{form.username(placeholder="Enter Username")}}
         <br>
 
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <label for="passowrd"><b>{{form.password.label}}</b></label>
+        {{form.password(placeholder="Enter Password")}}
         <br>
 
         <button type="submit" class="loginbtn">Login</button>
@@ -28,5 +25,4 @@
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
-
 {% endblock %}
