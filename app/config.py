@@ -1,4 +1,9 @@
-from get_localhost import get_localhost
+def get_localhost():
+    uri = str()
+    with open("db-uri.txt", 'r') as f:
+        uri = f.read()
+    return uri
+
 
 DEBUG = True
 SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.

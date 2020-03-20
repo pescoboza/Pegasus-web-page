@@ -34,7 +34,7 @@ def login():
         else:
             error = "Invalid Credentials. Please ty again."
 
-    return render_template("login.html", error=error)
+    return render_template("auth/login.html", error=error)
 
 
 # ---------------------------------------------------
