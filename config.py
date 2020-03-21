@@ -1,22 +1,16 @@
-def get_localhost():
-    uri = str()
-    try:
-        with open("db-uri.txt", 'r') as f:
-            uri = f.read()
-    except:
-        uri = "bogus//bogus@bogus:1234"
-    return uri
+from get_local_host import get_local_host
 
-class Config(object):
+class Config:
+
+    # General config
     ENV = "development"
+    TESTING = True
     DEBUG = True
     SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
     
+    # Database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
-    SQLALCHEMY_DATABASE_URI = ""  # TODO: Add heroku uri.
-    
-    SQLALCHEMY_DATABASE_URI = get_localhost() if DEBUG else ""
+    SQLALCHEMY_DATABASE_URI = get_local_host()
 
 
 

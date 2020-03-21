@@ -3,13 +3,13 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import config
+from config import Config
 
 # ---------------------------------------------------
 # Configuration setup
 # ---------------------------------------------------
 app = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 
