@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length, Email
 
-class RegisterForm(FlaskForm):
+class SignUpForm(FlaskForm):
     first_name = TextField(label="First Name", validators=[
                           InputRequired(), Length(**flen["first_name"])])
     last_name = TextField(label="Last Name", validators=[
