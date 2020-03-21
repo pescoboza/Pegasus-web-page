@@ -1,4 +1,4 @@
-# Useful Detauls
+# Useful Details
 **A. K. A.** little practical coding/markdown insights to keep in mind in special situations.
 
 ### Python relative imports
