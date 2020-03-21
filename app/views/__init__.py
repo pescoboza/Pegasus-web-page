@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, request
 from ..models.user import User
 from .. import app, db
 from ..forms.login_form import LoginForm
@@ -20,29 +20,23 @@ def login():
 
     form = LoginForm()
 
-    if form.validate_on_submit():
-        return redirect(url_for("/home"))
+    # Check for a POST request
+    if request.method == "POST" and form.validate_on_submit():
+        username = form.username
+        password = form.password
+        
+        # Query for the user with that username
+        user =  db.session.query(User).filter(User.username == username)[0]:
+        # Check the password
+        if user and user.password == password:
+            # TODO: Keep track of the logged in user in the current session
+            # TODO: Add logout option
+            return render_template("index.html", username=username)
 
-    return render_template("auth/login.html", form=form)
-    #error = None
+        return render_template("login.html", message="Invalid credentials. Please try again.")
+        
 
-    # user = {
-    #     "username": "lolo23jhon",
-    #     "password": "pegasus"
-    # }
-
-    # # TODO: Connect validation to database
-    # if request.method == "POST":
-    #     username = request.form["username"]
-    #     password = request.form["password"]
-
-    #     if username == user["username"] and password == user["password"]:
-    #         # TODO: Change redirection after succesful login
-    #         return redirect(url_for("index"))
-    #     else:
-    #         error = "Invalid Credentials. Please ty again."
-
-    # return render_template("auth/login.html", error=error)
+    return render_template("login.html", form=form)
 
 
 # ---------------------------------------------------
