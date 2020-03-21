@@ -1,3 +1,5 @@
+from models import FIELD_LENGTHS as flen
+
 class LoginForm(FlaskForm):
     username = TextField(label="Username", validators=[
                          InputRequired(), Length(**flen["username"])])
