@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 import wtforms
 from wtforms import TextField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length, Email
-import copy
 
 
 FIELD_LENGTHS = {
@@ -34,6 +33,7 @@ FIELD_LENGTHS = {
 }
 
 flen = FIELD_LENGTHS
+
 
 class LoginForm(FlaskForm):
     username = TextField(label="Username", validators=[

@@ -10,13 +10,12 @@ import config
 # ---------------------------------------------------
 app = Flask(__name__)
 
-
-app.debug = config.DEBUG
-app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
-app.config["SECRET_KEY"] = config.SECRET_KEY
-
 db = SQLAlchemy(app)
+
+app.config.from_object(config)
+
+
+
 
 # ---------------------------------------------------
 # Main function
@@ -24,4 +23,5 @@ db = SQLAlchemy(app)
 from views import *
 
 if __name__ == "__main__":
+    db.create_all()
     app.run()
