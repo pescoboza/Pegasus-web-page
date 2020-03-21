@@ -13,12 +13,12 @@ app.config.from_object("config.Config")
 db = SQLAlchemy(app)
 
 
-
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
+from .models.user import User
 from .views import *
 
+db.create_all()
 if __name__ == "__main__":
-    db.create_all()
     app.run()
