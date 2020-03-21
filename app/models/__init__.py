@@ -12,12 +12,12 @@ FIELD_LENGTHS = {
         "max": 30,
         "message": None
     },
-    "firstName": {
+    "first_name": {
         "min": 1,
         "max": 30,
         "message": None
     },
-    "lastName": {
+    "last_name": {
         "min": 1,
         "max": 30,
         "message": None

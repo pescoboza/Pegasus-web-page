@@ -20,5 +20,9 @@ from .models.user import User
 from .views import *
 
 db.create_all()
+me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon","lolo23jhon")
+db.session.add(me)
+db.session.commit()
 if __name__ == "__main__":
+
     app.run()

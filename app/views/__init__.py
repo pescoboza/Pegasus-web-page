@@ -26,7 +26,7 @@ def login():
         password = form.password
         
         # Query for the user with that username
-        user =  db.session.query(User).filter(User.username == username)[0]:
+        user =  db.session.query(User).filter(User.username == username)[0]
         # Check the password
         if user and user.password == password:
             # TODO: Keep track of the logged in user in the current session

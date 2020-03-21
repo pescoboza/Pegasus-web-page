@@ -4,16 +4,16 @@ from . import FIELD_LENGTHS as flen
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    firstName = db.Column(db.String(flen["firstName"]["max"]))
-    lastName = db.Column(db.String(flen["lastName"]["max"]))
+    first_name = db.Column(db.String(flen["first_name"]["max"]))
+    last_name = db.Column(db.String(flen["last_name"]["max"]))
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String(flen["password"]["max"]))
 
 
-    def __init__(self, t_firstName, t_lastName, t_email, t_username, t_password ):
-        self.firstName = t_firstName
-        self.lastName = t_lastName
-        self.email = t_email
-        self.username = t_username
-        self.password = t_password
+    def __init__(self, first_name, last_name, email, username, password ):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.username = username
+        self.password = password
