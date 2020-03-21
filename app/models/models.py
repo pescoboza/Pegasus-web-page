@@ -1,14 +1,14 @@
-from forms import FIELD_LENGTHS as flen
+from app import db
 
 
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary=True)
-    firstName = db.Columm(db.String(flen["firstName"]["max"]))
-    lastName = db.Columm(db.String(flen["lastName"]["max"]))
-    email = db.Column(db.String(flen["email"]["max"]), unique=True)
-    username = db.Column(db.String(flen["username"]["max"]), unique=True)
-    password = db.Column(db.String(flen["password"]["max"]))
+    firstName = db.Columm(db.String(FIELD_LENGTHS["firstName"]["max"]))
+    lastName = db.Columm(db.String(FIELD_LENGTHS["lastName"]["max"]))
+    email = db.Column(db.String(FIELD_LENGTHS["email"]["max"]), unique=True)
+    username = db.Column(db.String(FIELD_LENGTHS["username"]["max"]), unique=True)
+    password = db.Column(db.String(FIELD_LENGTHS["password"]["max"]))
 
 
     def __init__(self, t_firstName, t_lastName, t_email, t_username, t_password ):

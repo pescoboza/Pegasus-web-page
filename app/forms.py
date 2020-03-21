@@ -32,7 +32,6 @@ FIELD_LENGTHS = {
     },
 }
 
-flen = FIELD_LENGTHS
 
 
 class LoginForm(FlaskForm):
