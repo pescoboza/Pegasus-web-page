@@ -1,0 +1,22 @@
+[33m2df9132[m created login css file
+[33md115389[m edited login layout
+[33m2cba4ef[m basic sign in layout
+[33mb57df16[m Test Commit login.html
+[33mc9463f9[m Merged lolo23jhon_framework_structure: added boiler templates.
+[33m3062aa2[m Added render function for other pages.
+[33medc41cb[m Corrected typos in learning_resources.md
+[33m5bc59ef[m Updated README: moved learning links to learning_resources.
+[33m96707a4[m Updated README: moved learning links to learning_resources.
+[33maf783ef[m Updated README: moved learning links to learning_resources.
+[33md170108[m Added learning resources.
+[33m05d3af5[m Modified index template to show user and post mock objects.
+[33m04775ef[m Added TODO file.
+[33ma97c378[m Saved progress on boiler plate app to merge to development branch.
+[33m5cd7a05[m Created the application file.
+[33md7fa2f2[m Added static and template folders with boilerplate files and READMEs.
+[33ma11a795[m Added logo and created stylesheet in the directory static.
+[33m1f2e84c[m Installed psycopg2, sqlalchemy, and gunicorn in the virtual environment.
+[33mdae579e[m Installed psycopg2, sqlalchemy, and gunicorn in the virtual environment.
+[33mc8a07ac[m Updated readme file.
+[33m9ec2922[m Initialized virtual environment and intalled Flask.
+[33m6c6bf3c[m Added readme.
