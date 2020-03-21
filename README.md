@@ -1,6 +1,6 @@
 # Pegasus Web Project
 
-![Pegaus](./app/static/pegasus-logo.png =350x)
+<img src="app/static/pegasus-logo.png" alt="Pegasus Logo" width=250/>
 
 In this project we will be deploying the website for Pegasus.
 
