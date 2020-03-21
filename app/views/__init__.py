@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
-from app import app
-from models import *
-from forms import LoginForm
+from ..models.user import User
+from .. import app, db
+from ..forms.login_form import LoginForm
 
 # ---------------------------------------------------
 # Index page
