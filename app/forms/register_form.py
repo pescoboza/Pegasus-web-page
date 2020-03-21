@@ -3,18 +3,18 @@ from wtforms import TextField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length, Email
 
 class RegisterForm(FlaskForm):
-    firstName = TextField(label="First Name", validators=[
-                          InputRequired(), Length(**flen["firstName"])])
-    lastName = TextField(label="Last Name", validators=[
-                         InputRequired(), Length(**flen["lastName"])])
+    first_name = TextField(label="First Name", validators=[
+                          InputRequired(), Length(**flen["first_name"])])
+    last_name = TextField(label="Last Name", validators=[
+                         InputRequired(), Length(**flen["last_name"])])
     username = TextField(label="Username", validators=[
                          InputRequired(), Length(**flen["username"])])
     email = TextField(label="Email", validators=[
                       InputRequired(), Length(**flen["email"])])
 
-    password_first = PasswordField(label="Password", validators=[
+    password = PasswordField(label="Password", validators=[
                                    InputRequired(), Length(**flen["password"])])
-    password_again = PasswordField(label="Password", validators=[
+    repeat_password = PasswordField(label="Password", validators=[
                                    InputRequired(), Length(**flen["password"])])
 
     newsletter = BooleanField()

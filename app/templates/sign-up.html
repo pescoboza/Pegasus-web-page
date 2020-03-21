@@ -71,7 +71,7 @@
 
         <!-- Repeat password field -->
         <label for="repeat_password"><b>{{form.repeat_password.label}}</b></label>
-        {{form.repeat_password(placeholder="Password")}}
+        {{form.repeat_password(placeholder="Repeat Your Password")}}
         {% if form.repeat_password.errors %}
         <ul>
             {% for error in form.repeat_password.errors %}
@@ -81,16 +81,23 @@
         {% endif %}
         <br>
 
-        <!-- -->
+        <!-- Newsletter check box -->
+        <label for="newsletter">{{form.newsletter.label}}</label>
+        {{form.newsletter}}
+        <br>
+        <!-- Terms, conditions & privacy policy check box -->
+        <!-- TODO: Add the privacy policy -->
+        <!-- TODO: Add the terms and conditions link -->
+        <label for="accept_terms_and_conditions">I accept the <a href="#">privacy policy</a> aswell as the <a
+                href="#">terms and conditions</a></label>
+        {{form.accept_terms_and_conditions}}
+        <br>
+
+        <!-- Sign up button -->
         <input type="submit" value="Sign Up" class="loginbtn signupbtn">
         <br>
 
-        <label>
-            {{form.remember}}Remember me
-            <span><a href="#">Forgot password?</a></span>
-        </label>
-        <br>
-
+        <!-- TODO: Add redirection for cancel button -->>
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
