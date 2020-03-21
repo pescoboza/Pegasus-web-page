@@ -1,6 +1,6 @@
 # Pegasus Web Project
 
-<img src="app/static/pegasus-logo.png" alt="Pegasus Logo" width=250/>
+<img src="app/static/pegasus-logo.png" alt="Pegasus Logo" width="250"/>
 
 In this project we will be deploying the website for Pegasus.
 
