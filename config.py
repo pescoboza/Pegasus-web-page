@@ -3,7 +3,7 @@ from get_local_host import get_local_host
 class Config:
 
     # General config
-    ENV = "development"
+    FLASK_ENV = "development"
     TESTING = True
     DEBUG = True
     SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
