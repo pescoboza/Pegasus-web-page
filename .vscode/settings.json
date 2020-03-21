@@ -1,3 +1,15 @@
 {
-    "python.pythonPath": "C:\\Users\\sam's club\\.virtualenvs\\Pegasus-web-page-5zlzYNLo\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\sam's club\\.virtualenvs\\Pegasus-web-page-5zlzYNLo\\Scripts\\python.exe",
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"],
+
+    "[python]": {
+        "editor.formatOnSave": false
+    },
+
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Args": [
+        "--disable=E402",
+        "--max-line-length=120"
+    ]
 }

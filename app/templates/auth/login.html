@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Change form method -->
+<form action="" method="POST">
+    {{form.csrf_token}}
+    <div class="container">
+        <label for="username"><b>{{form.username.label}}</b></label>
+        {{form.username(placeholder="Enter Username")}}
+        {% if form.username.errors %}
+        <ul>
+            {% for error in form.username.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <label for="passowrd"><b>{{form.password.label}}</b></label>
+        {{form.password(placeholder="Enter Password")}}
+        {% if form.password.errors %}
+        <ul>
+            {% for error in form.password.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <input type="submit" value="Login" class="loginbtn">
+        <br>
+
+        <label>
+            {{form.remember}}Remember me
+            <span><a href="#">Forgot password?</a></span>
+        </label>
+        <br>
+
+        <button type="button" class="cancelbtn">Cancel</button>
+    </div>
+</form>
+{% endblock %}

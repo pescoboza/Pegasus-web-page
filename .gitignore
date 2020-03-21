@@ -1,0 +1,6 @@
+# Local host uri
+db-uri.txt
+
+# python temporary files
+app/__pycache__
+*.pyc
