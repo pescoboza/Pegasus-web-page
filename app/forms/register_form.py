@@ -1,3 +1,7 @@
+from flask_wtf import FlaskForm
+from wtforms import TextField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Length, Email
+
 class RegisterForm(FlaskForm):
     firstName = TextField(label="First Name", validators=[
                           InputRequired(), Length(**flen["firstName"])])
