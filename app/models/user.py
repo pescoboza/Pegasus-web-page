@@ -1,5 +1,3 @@
-from app import db
-
 
 class User(db.Model):
     __tablename__ = "users"
@@ -17,6 +15,3 @@ class User(db.Model):
         self.email = t_email
         self.username = t_username
         self.password = t_password
-
-
-# email regex: 	^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
