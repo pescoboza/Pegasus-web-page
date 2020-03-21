@@ -13,12 +13,20 @@ app.config.from_object("config.Config")
 db = SQLAlchemy(app)
 
 
-
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
+from .models.user import User
 from .views import *
 
+db.create_all()
+
+# TEST: Add mock user to database (only if it does not exist already)
+from datetime import datetime
+me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon","lolo23jhon",datetime.now().ctime())
+if not db.session.query(db.exists().where(User.username == me.username)).scalar():
+    db.session.add(me)
+    db.session.commit()
+
 if __name__ == "__main__":
-    db.create_all()
     app.run()
