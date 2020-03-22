@@ -40,7 +40,8 @@ def sign_up():
     
     # TODO: Add email confirmation to user registration
     # No error, add new user to database
-    db.session.add(new_user)
+    if new_user != None:
+        db.session.add(new_user)
     db.session.commit()
 
     return render_template("index.html", username=new_user)
