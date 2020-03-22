@@ -8,7 +8,7 @@
         {% if message %}
         <p class="auth-msg" name="login-auth-msg">{{message}}</p>
         {% endif %}
-        <label for="username"><b>{{form.username.label}}</b></label>
+        {{form.username.label}}
         {{form.username(placeholder="Enter Username")}}
         {% if form.username.errors %}
         <ul>
@@ -19,7 +19,7 @@
         {% endif %}
         <br>
 
-        <label for="passowrd"><b>{{form.password.label}}</b></label>
+        {{form.password.label}}
         {{form.password(placeholder="Enter Password")}}
         {% if form.password.errors %}
         <ul>
@@ -33,7 +33,7 @@
         <input type="submit" value="Login" class="loginbtn">
         <br>
 
-        <!-- TODO: Add redirection for forgot password -->>
+        <!-- TODO: Add redirection for forgot password -->
         <label>
             {{form.remember}}Remember me
             <span><a href="#">Forgot password?</a></span>

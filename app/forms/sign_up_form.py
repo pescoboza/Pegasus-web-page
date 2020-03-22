@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length, Email
+from ..models import FIELD_LENGTHS as flen
 
 class SignUpForm(FlaskForm):
     first_name = TextField(label="First Name", validators=[

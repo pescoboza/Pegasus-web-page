@@ -3,6 +3,7 @@
 
 {% block content %}
 <!-- Change form method -->
+{% if form %}
 <form action="" method="POST">
     {{form.csrf_token}}
     <div class="container">
@@ -10,7 +11,7 @@
         <p class="auth-msg" name="register-auth-msg">{{message}}</p>
         {% endif %}
         <!--First name field-->
-        <label for="first_name"><b>{{form.first_name.label}}</b></label>
+        {{form.first_name.label}}
         {{form.first_name(placeholder="First Name")}}
         {% if form.first_name.errors %}
         <ul>
@@ -22,7 +23,7 @@
         <br>
 
         <!-- Last name field -->
-        <label for="last_name"><b>{{form.last_name.label}}</b></label>
+        {{form.last_name.label}}
         {{form.last_name(placeholder="Last Name")}}
         {% if form.last_name.errors %}
         <ul>
@@ -34,7 +35,7 @@
         <br>
 
         <!-- Email field -->
-        <label for="email"><b>{{form.email.label}}</b></label>
+        {{form.email.label}}
         {{form.email(placeholder="Email")}}
         {% if form.email.errors %}
         <ul>
@@ -46,7 +47,7 @@
         <br>
 
         <!-- Username field -->
-        <label for="username"><b>{{form.username.label}}</b></label>
+        {{form.username.label}}
         {{form.username(placeholder="Username")}}
         {% if form.username.errors %}
         <ul>
@@ -58,7 +59,7 @@
         <br>
 
         <!-- Password field -->
-        <label for="password"><b>{{form.password.label}}</b></label>
+        {{form.password.label}}
         {{form.password(placeholder="Password")}}
         {% if form.password.errors %}
         <ul>
@@ -70,7 +71,7 @@
         <br>
 
         <!-- Repeat password field -->
-        <label for="repeat_password"><b>{{form.repeat_password.label}}</b></label>
+        {{form.repeat_password.label}}
         {{form.repeat_password(placeholder="Repeat Your Password")}}
         {% if form.repeat_password.errors %}
         <ul>
@@ -82,23 +83,21 @@
         <br>
 
         <!-- Newsletter check box -->
-        <label for="newsletter">{{form.newsletter.label}}</label>
-        {{form.newsletter}}
-        <br>
+        <label>{{form.newsletter}}I want to receive the Pegasus newsletter.</label><br>
         <!-- Terms, conditions & privacy policy check box -->
         <!-- TODO: Add the privacy policy -->
         <!-- TODO: Add the terms and conditions link -->
-        <label for="accept_terms_and_conditions">I accept the <a href="#">privacy policy</a> aswell as the <a
-                href="#">terms and conditions</a></label>
-        {{form.accept_terms_and_conditions}}
-        <br>
-
+        <label>{{form.accept_terms_and_conditions}}I accept the <a href="#">privacy policy</a> aswell as the <a
+                href="#">terms and conditions</a></label> <br>
         <!-- Sign up button -->
         <input type="submit" value="Sign Up" class="loginbtn signupbtn">
         <br>
 
-        <!-- TODO: Add redirection for cancel sign up button -->>
+        <!-- TODO: Add redirection for cancel sign up button -->
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
+{% elif message %}
+{{message}}
+{% endif %}
 {% endblock %}

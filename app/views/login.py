@@ -23,7 +23,7 @@ def login():
         if user and user.password == password:
             # TODO: Keep track of the logged in user in the current session
             # TODO: Add logout option
-            return render_template("index.html", username=username)
+            return render_template("index.html", user=user)
 
         message = "Invalid credentials. Please try again."
         
