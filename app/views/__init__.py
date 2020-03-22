@@ -5,8 +5,8 @@ from ..forms.login_form import LoginForm
 from ..forms.sign_up_form import SignUpForm
 
 from .login import *
-from .sign_up import *
 from .sign_up_confirmation import *
+from .sign_up import *
 
 
 # ---------------------------------------------------
