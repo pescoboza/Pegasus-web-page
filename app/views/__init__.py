@@ -18,7 +18,7 @@ class Button:
         <input type="submit" value="{{button.value}}">
     </form>
     """
-    __init__(self, value, action):
+    def __init__(self, value, action):
         self.link = link
         self.text = text
 

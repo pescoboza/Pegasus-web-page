@@ -3,7 +3,6 @@ from flask import render_template, redirect, url_for, request
 from .. import app, db
 from ..models.user import User
 from ..forms.sign_up_form import SignUpForm
-from . import cover_email
 
 # ---------------------------------------------------
 # Sign up page
@@ -13,10 +12,11 @@ def sign_up():
 
     form = SignUpForm()
     
+    validation_error = False
+    new_user = None
 
     # TODO: Add validation for matching password with repeated password
     if request.method == "POST":
-        validation_error = False
 
         if form.validate_on_submit():
 
@@ -34,21 +34,17 @@ def sign_up():
         if validation_error:
             return render_template("sign_up.html", form=form)
 
-    new_user = User(
-        form.first_name,
-        form.last_name,
-        form.email,
-        form.username,
-        form.password, 
-        datetime.now().ctime())
+            new_user = User(
+                form.first_name.data,
+                form.last_name.data,
+                form.email.data,
+                form.username.data,
+                form.password.data, 
+                datetime.now().ctime())  
+
+            # TODO: Add email confirmation to user registration
+            # No error, add new user to database
+            db.session.add(new_user)
+            db.session.commit()
     
-    # TODO: Add email confirmation to user registration
-    # No error, add new user to database
-    db.session.add(new_user)
-    db.session.commit()
-
-    # TODO: Render email confirmation view after succesful registration
-    if validation_error:
-        return render_template("sign_up.html", form=form)
-
-    return redirect(url_for("/sign_up/confirmation"), message=message)
+    return redirect(url_for("/sign-up-confirmation"), message=message)
