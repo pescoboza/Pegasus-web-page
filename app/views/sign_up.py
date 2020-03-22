@@ -1,8 +1,9 @@
 from datetime import datetime
-from flask import render_template, request
+from flask import render_template, redirect, url_for, request
 from .. import app, db
 from ..models.user import User
 from ..forms.sign_up_form import SignUpForm
+from . import cover_email
 
 # ---------------------------------------------------
 # Sign up page
@@ -11,37 +12,43 @@ from ..forms.sign_up_form import SignUpForm
 def sign_up():
 
     form = SignUpForm()
-    validation_error = False
-    new_user = None
+    
 
     # TODO: Add validation for matching password with repeated password
-    if request.method == "POST" and form.validate_on_submit():
-        new_user = User(
-            form.first_name,
-            form.last_name,
-            form.email,
-            form.username,
-            form.password, 
-            datetime.now().ctime())
+    if request.method == "POST":
+        validation_error = False
 
+        if form.validate_on_submit():
 
-        # Check if email is available
-        if db.session.query(User).filter(User.email == new_user.email).count() != 0:
-            form.email.errors.append("That email address is already registered.")
-            validation_error = True
+            # Check if email is available
+            if db.session.query(User).filter(User.email == form.email).count() != 0:
+                form.email.errors.append("That email address is already registered.")
+                validation_error = True
 
-        # Check if username is available
-        if db.session.query(User).filter(User.username == new_user).count() != 0:
-            form.username.errors.append("That username is already taken.")
-            validation_error = True
+            # Check if username is available
+            if db.session.query(User).filter(User.username == form.username).count() != 0:
+                form.username.errors.append("That username is already taken.")
+                validation_error = True
+        
+        # Database validation failed, return the form with respective errors
+        if validation_error:
+            return render_template("sign_up.html", form=form)
 
-    if validation_error:
-        return render_template("sign_up.html", form=form)
+    new_user = User(
+        form.first_name,
+        form.last_name,
+        form.email,
+        form.username,
+        form.password, 
+        datetime.now().ctime())
     
     # TODO: Add email confirmation to user registration
     # No error, add new user to database
-    if new_user != None:
-        db.session.add(new_user)
+    db.session.add(new_user)
     db.session.commit()
 
-    return render_template("index.html", username=new_user)
+    # TODO: Render email confirmation view after succesful registration
+    if validation_error:
+        return render_template("sign_up.html", form=form)
+
+    return redirect(url_for("/sign_up/confirmation"), message=message)
