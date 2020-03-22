@@ -11,7 +11,7 @@ from .sign_up_confirmation import *
 @app.route("/sign-up", methods=["GET","POST"])
 def sign_up():
 
-    form = SignUpForm()   
+    form = SignUpForm()
     
     # TODO: Add validation for matching password with repeated password
     if request.method == "POST" and form.validate_on_submit():
