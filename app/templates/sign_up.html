@@ -3,6 +3,7 @@
 
 {% block content %}
 <!-- Change form method -->
+{% if form %}
 <form action="" method="POST">
     {{form.csrf_token}}
     <div class="container">
@@ -101,4 +102,7 @@
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
+{% elif message %}
+{{message}}
+{% endif %}
 {% endblock %}
