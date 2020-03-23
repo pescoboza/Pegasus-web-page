@@ -10,6 +10,7 @@ class Config:
     
     # Database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # TODO: Change database URI to Heroku database.
     SQLALCHEMY_DATABASE_URI = get_local_host()
 
 
