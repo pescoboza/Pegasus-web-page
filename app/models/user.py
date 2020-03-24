@@ -9,13 +9,15 @@ class User(db.Model):
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String(flen["password"]["max"]))
-    date_created = db.Column(db.DateTime)
+    created_on = db.Column(db.DateTime)
 
 
-    def __init__(self, first_name, last_name, email, username, password, date_created):
+    def __init__(self, first_name, last_name, email, username, password, created_on):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = password
-        self.date_created = date_created
+        self.created_on = created_on
+        self.confirmed = False
+        self.confirmed_on = None

@@ -7,8 +7,22 @@ class Config:
     TESTING = True
     DEBUG = True
     SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
+    # TODO: Add security password salt
+    SECURITY_PASSWORD_SALT = '\0'
     
     # Database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # TODO: Change database URI to Heroku database.
     SQLALCHEMY_DATABASE_URI = get_local_host()
+
+    # Email settings
+    # TODO: Fill in email settings
+    # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
+    MAIL_SERVER = ""
+    MAIL_PORT = 0
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = ""
+    MAIL_PASSWORD = ""
+    MAIL_DEFAULT_SENDER = ""
+
