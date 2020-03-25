@@ -21,3 +21,7 @@ class User(db.Model):
         self.created_on = created_on
         self.confirmed = False
         self.confirmed_on = None
+
+    # TODO: Implement check for authentication
+    def is_authenthicated():
+        raise Exception("WRITE ME!")
