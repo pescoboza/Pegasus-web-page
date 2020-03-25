@@ -10,6 +10,7 @@ class User(db.Model):
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String(flen["password"]["max"]))
     created_on = db.Column(db.DateTime)
+    admin = db.Column(db.Boolean, default=False)
 
 
     def __init__(self, first_name, last_name, email, username, password, created_on):
