@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for
-from .models.user import User
+from ..models.user import User
 from ..token import generate_confirmation_token, confirm_token
 from .. import app, db
 
