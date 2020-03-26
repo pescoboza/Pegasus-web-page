@@ -1,10 +1,10 @@
 from datetime import datetime
 from flask import render_template, redirect, url_for, request, session
-from passlib.hash import sha_256
+from passlib.hash import sha256_crypt
 from .. import app, db
 from ..models.user import User
 from ..forms.sign_up_form import SignUpForm     
-from token import generate_confirmation_token
+from ..token import generate_confirmation_token
 from .sign_up_confirmation import *
 
 # ---------------------------------------------------
