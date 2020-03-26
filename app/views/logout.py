@@ -1,4 +1,5 @@
-from flask import flash, redirect, url_for
+import gc
+from flask import flash, redirect, url_for, session
 from .. import app
 from ..decorators import login_required
 
@@ -7,6 +8,5 @@ from ..decorators import login_required
 @login_required
 def logout():
     session.clear()
-    flash("Use logged out.")
-    # TODO: Add garbage collector
+    gc.collect()
     return redirect(url_for("/home"))
