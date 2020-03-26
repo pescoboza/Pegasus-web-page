@@ -3,7 +3,7 @@ from passlib.hash import sha256_crypt
 from . import app, db
 from .models.user import User
 
-@manager.command
+@admin_required
 # Creatse an administrator user
 def create_admin(first_name, last_name,email, username ,password):
     admin_user = User(first_name, last_name,email, username, sha256_crypt.hash(password), datetime.now().ctime())
