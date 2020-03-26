@@ -3,7 +3,7 @@ from flask import render_template, request, session
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
-from passlib import 
+from passlib.hash import sha256_cryp
 
 # ---------------------------------------------------
 # Login page
@@ -28,6 +28,7 @@ def login():
 
             session["logged_in"] = True
             session["username"] = username
+
 
             return render_template("index.html", user=user)
 
