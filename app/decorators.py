@@ -20,4 +20,4 @@ def login_required(func):
             return func(*args, **kwargs)
         else:
             flash("Please login to continue.")
-            return redirect("")
+            return redirect(url_for("/login"))

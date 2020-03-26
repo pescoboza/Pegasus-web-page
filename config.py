@@ -19,7 +19,7 @@ class Config:
     # TODO: Fill in email settings
     # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
     MAIL_SERVER = ""
-    MAIL_PORT = 0
+    MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     MAIL_USERNAME = ""

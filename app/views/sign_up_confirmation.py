@@ -3,6 +3,7 @@ from flask import render_template, flash, redirect, url_for
 from ..models.user import User
 from ..token import generate_confirmation_token, confirm_token
 from .. import app, db
+from ..decorators import login_required
 
 @app.route("/confirm/<token>")
 @login_required # TODO: Add decorators

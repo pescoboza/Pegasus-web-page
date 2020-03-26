@@ -1,9 +1,9 @@
 from datetime import datetime
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, session
 from .. import app, db
 from ..models.user import User
+from ..forms.sign_up_form import SignUpForm     
 from token import generate_confirmation_token
-from ..forms.sign_up_form import SignUpForm
 from .sign_up_confirmation import *
 
 # ---------------------------------------------------
@@ -37,9 +37,10 @@ def sign_up():
                 form.email.data,
                 form.username.data,
                 form.password.data, 
-                datetime.now().ctime())  
+                datetime.now())  
 
             # TODO: Add email confirmation to user registration
+            
             # Add the new user to the database
             db.session.add(new_user)
             db.session.commit()

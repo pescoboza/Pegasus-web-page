@@ -7,7 +7,7 @@ def get_src_from_file(filename):
         raise EmptyFile("The file {} was empty!".format(filename))
     return src
 
-
+def 
 
 #import smtplib
 # from email.mime.text import MIMEText
