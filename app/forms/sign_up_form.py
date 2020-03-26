@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Length, Email
+from wtforms.validators import InputRequired, Length, Email, EqualTo
 from ..models import FIELD_LENGTHS as flen
 
 class SignUpForm(FlaskForm):
@@ -14,7 +14,9 @@ class SignUpForm(FlaskForm):
                       InputRequired(), Length(**flen["email"])])
 
     password = PasswordField(label="Password", validators=[
-                                   InputRequired(), Length(**flen["password"])])
+                                   InputRequired(), 
+                                   Length(**flen["password"]), 
+                                   EqualTo("password", message="Passwords must match.")])
     repeat_password = PasswordField(label="Password", validators=[
                                    InputRequired(), Length(**flen["password"])])
 

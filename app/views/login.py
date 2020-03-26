@@ -1,7 +1,8 @@
-from flask import render_template, request
+from flask import render_template, request, session
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
+from passlib.hash import sha256_crypt
 
 # ---------------------------------------------------
 # Login page
@@ -20,12 +21,15 @@ def login():
         # Query for the user with that username
         user =  db.session.query(User).filter(User.username == username).first()
         # Check the password
-        if user and user.password == password:
-            # TODO: Keep track of the logged in user in the current session
-            # TODO: Add logout option
+        if user and sha256_crypt.verify(user.password, password):
+            # TODO: Add logout option session.
+
+            session["logged_in"] = True
+            session["username"] = username
+
+
             return render_template("index.html", user=user)
 
         message = "Invalid credentials. Please try again."
         
-
     return render_template("login.html", form=form, message=message)
