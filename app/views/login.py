@@ -22,7 +22,7 @@ def login():
         # Query for the user with that username
         user =  db.session.query(User).filter(User.username == username).first()
         # Check the password
-        if user and user.password == password:
+        if user and sha256_cryp.verify(user.password, password):
             # TODO: Keep track of the logged in user in the current session
             # TODO: Add logout option session.
 
