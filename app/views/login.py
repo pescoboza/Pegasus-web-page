@@ -4,6 +4,8 @@ from ..models.user import User
 from ..forms.login_form import LoginForm
 from passlib.hash import sha256_crypt
 
+import sys
+
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
@@ -19,9 +21,10 @@ def login():
         password = form.password.data
         
         # Query for the user with that username
-        user =  db.session.query(User).filter(User.username == username).first()
+        user =  db.session.query(User).filter(User.username == "mono").first() 
+
         # Check the password
-        if user and sha256_crypt.verify(user.password, password):
+        if user != None and sha256_crypt.verify(password,user.password):
             # TODO: Add logout option session.
 
             session["logged_in"] = True
