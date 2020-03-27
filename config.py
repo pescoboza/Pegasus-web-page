@@ -18,11 +18,10 @@ class Config:
     # Email settings
     # TODO: Fill in email settings
     # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
-    MAIL_SERVER = ""
+    MAIL_SERVER = "smpt.gmail.com"
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = ""
-    MAIL_PASSWORD = ""
-    MAIL_DEFAULT_SENDER = ""
+    MAIL_USERNAME = "pegasus.csn@gmail.com"
+    MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
 
