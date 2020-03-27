@@ -32,5 +32,6 @@ if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
     db.session.add(me)
     db.session.commit()
 
+
 if __name__ == "__main__":
     app.run()    
