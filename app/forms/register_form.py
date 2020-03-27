@@ -3,7 +3,7 @@ from wtforms import TextField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from ..models import FIELD_LENGTHS as flen
 
-class SignUpForm(FlaskForm):
+class RegisterForm(FlaskForm):
     first_name = TextField(label="First Name", validators=[
                           InputRequired(), Length(**flen["first_name"])])
     last_name = TextField(label="Last Name", validators=[

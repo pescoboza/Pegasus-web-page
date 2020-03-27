@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, request, session
 from passlib.hash import sha256_crypt
 from .. import app, db
 from ..models.user import User
-from ..forms.sign_up_form import SignUpForm     
+from ..forms.sign_up_form import RegisterForm     
 from ..token import generate_confirmation_token
 from .sign_up_confirmation import *
 
@@ -14,7 +14,7 @@ from .sign_up_confirmation import *
 @app.route("/sign-up", methods=["GET","POST"])
 def register():
 
-    form = SignUpForm()
+    form = RegisterForm()
     
     # TODO: Add validation for matching password with repeated password
     if request.method == "POST" and form.validate_on_submit():
