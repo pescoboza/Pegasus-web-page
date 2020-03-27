@@ -10,8 +10,9 @@ from .sign_up_confirmation import *
 # ---------------------------------------------------
 # Sign up page
 # ---------------------------------------------------
+@app.route("/register", methods=["GET","POST"])
 @app.route("/sign-up", methods=["GET","POST"])
-def sign_up():
+def register():
 
     form = SignUpForm()
     

@@ -21,11 +21,12 @@ from .views import *
 
 db.create_all()
 
-# TEST: Add mock user to database (only if it does not exist already)
+# TODO: Remove this mock admin account
 from datetime import datetime
 from passlib.hash import sha256_crypt
-me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon",sha256_crypt.hash("lolo23jhon"),datetime.now().ctime())
-if not db.session.query(db.exists().where(User.username == me.username)).scalar():
+me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon",sha256_crypt.hash("lolo23jhon"),datetime.now())
+me.admin = True
+if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
     db.session.add(me)
     db.session.commit()
 
