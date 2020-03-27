@@ -8,9 +8,11 @@ class User(db.Model):
     last_name = db.Column(db.String(flen["last_name"]["max"]))
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
-    password = db.Column(db.String(flen["password"]["max"]))
+    password = db.Column(db.String())
     created_on = db.Column(db.DateTime)
     admin = db.Column(db.Boolean, default=False)
+    confirmed = db.Column(db.Boolean, default=False)
+    confirmed_on = db.Column(db.DateTime)
 
 
     def __init__(self, first_name, last_name, email, username, password, created_on):

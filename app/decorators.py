@@ -6,7 +6,8 @@ from .models.user import User
 def check_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
-        if current_user.confirmed == False:
+        user = db.session.query(User).filter(User.username == session["username"]).first_or_404()
+        if user.confirmed == False:
             flash("Please confirm your account.","warning")
             return redirect(url_for("/confirm"))
         return func(*args, **kwargs)

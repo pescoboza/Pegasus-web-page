@@ -7,7 +7,7 @@ from ..decorators import login_required
 
 @app.route("/confirm/<token>")
 @login_required
-def confirm_email(token): 
+def user_confirmation(token): 
     try: 
         email = confirm_token(token)
     except:
@@ -19,7 +19,7 @@ def confirm_email(token):
         return redirect(url_for("/login"))
     else:
         user.confirmed = True
-        user.confirmed_on = datetime.now().ctime()
+        user.confirmed_on = datetime.now()
         db.session.add(user)
         db.session.commit()
         flash("You succesfully confirmed your account. Thank you!","success")
