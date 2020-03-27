@@ -1,24 +1,25 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.validators import Required, Length, Email, EqualTo
 from ..models import FIELD_LENGTHS as flen
 
 class RegisterForm(FlaskForm):
     first_name = TextField(label="First Name", validators=[
-                          InputRequired(), Length(**flen["first_name"])])
+                          Required(), Length(**flen["first_name"])])
     last_name = TextField(label="Last Name", validators=[
-                         InputRequired(), Length(**flen["last_name"])])
+                         Required(), Length(**flen["last_name"])])
     username = TextField(label="Username", validators=[
-                         InputRequired(), Length(**flen["username"])])
+                         Required(), Length(**flen["username"])])
     email = TextField(label="Email", validators=[
-                      InputRequired(), Length(**flen["email"])])
+                      Required(), Length(**flen["email"])])
 
     password = PasswordField(label="Password", validators=[
-                                   InputRequired(), 
-                                   Length(**flen["password"]), 
-                                   EqualTo("password", message="Passwords must match.")])
+                                   Required(), 
+                                   Length(**flen["password"])])
     repeat_password = PasswordField(label="Password", validators=[
-                                   InputRequired(), Length(**flen["password"])])
+                                   Required(),  
+                                   EqualTo("password", 
+                                   message="Passwords must match.")])
 
     newsletter = BooleanField()
-    accept_terms_and_conditions = BooleanField()
+    accept_terms_and_conditions = BooleanField(validators=[Required()])

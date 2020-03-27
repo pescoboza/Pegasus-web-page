@@ -11,6 +11,8 @@ class User(db.Model):
     password = db.Column(db.String())
     created_on = db.Column(db.DateTime)
     admin = db.Column(db.Boolean, default=False)
+    confirmed = db.Column(db.Boolean, default=False)
+    confirmed_on = db.Column(db.DateTime)
 
 
     def __init__(self, first_name, last_name, email, username, password, created_on):

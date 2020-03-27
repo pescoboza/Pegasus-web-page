@@ -26,9 +26,11 @@ from datetime import datetime
 from passlib.hash import sha256_crypt
 me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon",sha256_crypt.hash("lolo23jhon"),datetime.now())
 me.admin = True
+me.confirmed = True
+me.confirmed_on = datetime.now()
 if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
     db.session.add(me)
     db.session.commit()
 
 if __name__ == "__main__":
-    app.run()
+    app.run()    

@@ -49,6 +49,6 @@ def register():
 
             token = generate_confirmation_token(new_user.email)
 
-            return sign_up_confirmation()
+            return user_confirmation()
 
     return render_template("sign_up.html", form=form)

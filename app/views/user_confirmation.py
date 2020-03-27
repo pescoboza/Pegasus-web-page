@@ -7,7 +7,7 @@ from ..decorators import login_required
 
 @app.route("/confirm/<token>")
 @login_required
-def confirm_email(token): 
+def user_confirmation(token): 
     try: 
         email = confirm_token(token)
     except:
