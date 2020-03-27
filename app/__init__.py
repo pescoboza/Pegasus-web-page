@@ -23,7 +23,8 @@ db.create_all()
 
 # TEST: Add mock user to database (only if it does not exist already)
 from datetime import datetime
-me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon","lolo23jhon",datetime.now().ctime())
+from passlib.hash import sha256_crypt
+me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon",sha256_crypt.hash("lolo23jhon"),datetime.now().ctime())
 if not db.session.query(db.exists().where(User.username == me.username)).scalar():
     db.session.add(me)
     db.session.commit()
