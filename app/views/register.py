@@ -3,9 +3,9 @@ from flask import render_template, redirect, url_for, request, session
 from passlib.hash import sha256_crypt
 from .. import app, db
 from ..models.user import User
-from ..forms.sign_up_form import RegisterForm     
+from ..forms.register_form import RegisterForm     
 from ..token import generate_confirmation_token
-from .sign_up_confirmation import *
+from .user_confirmation import user_confirmation
 
 # ---------------------------------------------------
 # Sign up page
@@ -21,12 +21,12 @@ def register():
         validation_error = False
 
         # Check if email is available
-        if db.session.query(User).filter(User.email == form.email).count() != 0:
+        if db.session.query(User).filter(User.email == form.email.data).first() != None:
             form.email.errors.append("That email address is already registered.")
             validation_error = True
 
         # Check if username is available
-        if db.session.query(User).filter(User.username == form.username).count() != 0:
+        if db.session.query(User).filter(User.username == form.username.data).first() != None:
             form.username.errors.append("That username is already taken.")
             validation_error = True
     
@@ -38,7 +38,7 @@ def register():
                 form.last_name.data,
                 form.email.data,
                 form.username.data,
-                sha_256.hash(form.password.data), 
+                sha256_crypt.hash(form.password.data), 
                 datetime.now())  
 
             # TODO: Add email confirmation to user registration

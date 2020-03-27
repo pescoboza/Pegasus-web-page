@@ -2,11 +2,11 @@ from flask import render_template, redirect, request
 from ..models.user import User
 from .. import app, db
 from ..forms.login_form import LoginForm
-from ..forms.sign_up_form import RegisterForm
+from ..forms.register_form import RegisterForm
 
 from .login import *
-from .sign_up_confirmation import *
-from .register import register
+from .user_confirmation import *
+from .register import *
 
 
 # ---------------------------------------------------
