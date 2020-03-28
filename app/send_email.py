@@ -23,7 +23,7 @@ def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=Non
 
 
 # TODO: set MAX_EMAIL flag in config.py.
-def send_email(subject,recipients,text_body,html_body=None,cc=None,bcc=None):
+def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(
             subject=subject,
