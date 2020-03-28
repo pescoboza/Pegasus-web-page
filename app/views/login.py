@@ -21,7 +21,7 @@ def login():
         password = form.password.data
         
         # Query for the user with that username
-        user =  db.session.query(User).filter(User.username == "mono").first() 
+        user =  db.session.query(User).filter(User.username == username).first() 
 
         # Check the password
         if user != None and sha256_crypt.verify(password,user.password):
