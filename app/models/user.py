@@ -10,19 +10,19 @@ class User(db.Model):
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String())
-    created_on = db.Column(db.DateTime)
+    registered_on = db.Column(db.DateTime)
     admin = db.Column(db.Boolean, default=False)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
 
 
-    def __init__(self, first_name, last_name, email, username, password, created_on):
+    def __init__(self, first_name, last_name, email, username, password, registered_on):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = sha256_crypt.hash(password)
-        self.created_on = created_on
+        self.registered_on = registered_on
         self.confirmed = False
         self.confirmed_on = None
 
