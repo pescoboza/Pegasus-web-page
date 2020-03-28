@@ -3,6 +3,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 
 # ---------------------------------------------------
 # Configuration setup
@@ -11,6 +12,8 @@ app = Flask(__name__)
 app.config.from_object("config.Config")
 
 db = SQLAlchemy(app)
+
+mail = Mail(app)
 
 
 # ---------------------------------------------------
