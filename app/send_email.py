@@ -2,7 +2,7 @@ from flask_mail import Mail, Message
 from . import app, mail
 
 
-
+# TODO: set MAX_EMAIL flag in config.py.
 def send_email(subject,recipients,text_body,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(

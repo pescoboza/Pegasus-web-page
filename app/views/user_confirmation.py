@@ -12,6 +12,7 @@ def user_confirmation(token):
     except:
         flash("The confirmation link is invalid or has expired","danger")
     
+    # TODO: Add setting to app for 404 page.
     user = db.session.query(User).filter(User.email == email).first_or_404()
     if user != None and user.confirmed:
         flash("Acount already confirmed. Please login.","success")
