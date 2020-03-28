@@ -1,5 +1,7 @@
 # Pegasus Web Project
 
+<img src="app/static/pegasus-logo.png" alt="Pegasus Logo" width="250"/>
+
 In this project we will be deploying the website for Pegasus.
 
 We will be using the flask framework for backend.

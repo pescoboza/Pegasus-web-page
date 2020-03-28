@@ -14,6 +14,8 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
 flask-wtf = "*"
+passlib = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.7"

@@ -5,7 +5,10 @@
 <form action="" method="POST">
     {{form.csrf_token}}
     <div class="container">
-        <label for="username"><b>{{form.username.label}}</b></label>
+        {% if message %}
+        <p class="auth-msg" name="login-auth-msg">{{message}}</p>
+        {% endif %}
+        {{form.username.label}}
         {{form.username(placeholder="Enter Username")}}
         {% if form.username.errors %}
         <ul>
@@ -16,7 +19,7 @@
         {% endif %}
         <br>
 
-        <label for="passowrd"><b>{{form.password.label}}</b></label>
+        {{form.password.label}}
         {{form.password(placeholder="Enter Password")}}
         {% if form.password.errors %}
         <ul>
@@ -30,12 +33,14 @@
         <input type="submit" value="Login" class="loginbtn">
         <br>
 
+        <!-- TODO: Add redirection for forgot password -->
         <label>
             {{form.remember}}Remember me
-            <span><a href="#">Forgot password?</a></span>
+            <br><span><a href="#">Forgot password?</a></span>
         </label>
         <br>
 
+        <!-- TODO: Add redirection for cancel login button -->
         <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>

@@ -1,21 +1,25 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Length, Email
+from wtforms.validators import Required, Length, Email, EqualTo
+from ..models import FIELD_LENGTHS as flen
 
 class RegisterForm(FlaskForm):
-    firstName = TextField(label="First Name", validators=[
-                          InputRequired(), Length(**flen["firstName"])])
-    lastName = TextField(label="Last Name", validators=[
-                         InputRequired(), Length(**flen["lastName"])])
+    first_name = TextField(label="First Name", validators=[
+                          Required(), Length(**flen["first_name"])])
+    last_name = TextField(label="Last Name", validators=[
+                         Required(), Length(**flen["last_name"])])
     username = TextField(label="Username", validators=[
-                         InputRequired(), Length(**flen["username"])])
+                         Required(), Length(**flen["username"])])
     email = TextField(label="Email", validators=[
-                      InputRequired(), Length(**flen["email"])])
+                      Required(), Length(**flen["email"])])
 
-    password_first = PasswordField(label="Password", validators=[
-                                   InputRequired(), Length(**flen["password"])])
-    password_again = PasswordField(label="Password", validators=[
-                                   InputRequired(), Length(**flen["password"])])
+    password = PasswordField(label="Password", validators=[
+                                   Required(), 
+                                   Length(**flen["password"])])
+    repeat_password = PasswordField(label="Password", validators=[
+                                   Required(),  
+                                   EqualTo("password", 
+                                   message="Passwords must match.")])
 
     newsletter = BooleanField()
-    accept_terms_and_conditions = BooleanField()
+    accept_terms_and_conditions = BooleanField(validators=[Required()])

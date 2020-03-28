@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<!-- Change form method -->
+{% if form %}
+<form action="" method="POST">
+    {{form.csrf_token}}
+    <div class="container">
+        {% if message %}
+        <p class="auth-msg" name="register-auth-msg">{{message}}</p>
+        {% endif %}
+        <!--First name field-->
+        {{form.first_name.label}}
+        {{form.first_name(placeholder="First Name")}}
+        {% if form.first_name.errors %}
+        <ul>
+            {% for error in form.first_name.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Last name field -->
+        {{form.last_name.label}}
+        {{form.last_name(placeholder="Last Name")}}
+        {% if form.last_name.errors %}
+        <ul>
+            {% for error in form.last_name.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Email field -->
+        {{form.email.label}}
+        {{form.email(placeholder="Email")}}
+        {% if form.email.errors %}
+        <ul>
+            {% for error in form.email.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Username field -->
+        {{form.username.label}}
+        {{form.username(placeholder="Username")}}
+        {% if form.username.errors %}
+        <ul>
+            {% for error in form.username.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Password field -->
+        {{form.password.label}}
+        {{form.password(placeholder="Password")}}
+        {% if form.password.errors %}
+        <ul>
+            {% for error in form.password.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Repeat password field -->
+        {{form.repeat_password.label}}
+        {{form.repeat_password(placeholder="Repeat Your Password")}}
+        {% if form.repeat_password.errors %}
+        <ul>
+            {% for error in form.repeat_password.errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
+        <!-- Newsletter check box -->
+        <label>{{form.newsletter}}I want to receive the Pegasus newsletter.</label><br>
+        <!-- Terms, conditions & privacy policy check box -->
+        <!-- TODO: Add the privacy policy -->
+        <!-- TODO: Add the terms and conditions link -->
+        <label>{{form.accept_terms_and_conditions}}I accept the <a href="#">privacy policy</a> aswell as the <a
+                href="#">terms and conditions</a></label> <br>
+        <!-- Sign up button -->
+        <input type="submit" value="Sign Up" class="loginbtn signupbtn">
+        <br>
+
+        <!-- TODO: Add redirection for cancel sign up button -->
+        <button type="button" class="cancelbtn">Cancel</button>
+    </div>
+</form>
+{% elif message %}
+{{message}}
+{% endif %}
+{% endblock %}
