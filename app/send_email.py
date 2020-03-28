@@ -1,3 +1,4 @@
+from flask_mail import Mail, Message
 from . import app
 
 def get_src_from_file(filename):
@@ -10,8 +11,6 @@ def get_src_from_file(filename):
 
 def 
 
-import smtplib
-from email.mime.text import MIMEText
 
 # TODO: Setup email sending.
 def send_email(receiver_email,message, subject):
