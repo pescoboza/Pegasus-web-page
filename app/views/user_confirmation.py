@@ -12,7 +12,7 @@ def user_confirmation(token):
     except:
         flash("The confirmation link is invalid or has expired","danger")
     
-    user = db.session.query(User).filter(User.email == email).first()
+    user = db.session.query(User).filter(User.email == email).first_or_404()
     if user != None and user.confirmed:
         flash("Acount already confirmed. Please login.","success")
         return redirect(url_for("/login"))
