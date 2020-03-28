@@ -3,7 +3,7 @@ from . import app, mail
 
 
 
-def send_email(subject,recipients,text_body,html_body=None,,cc=None,bcc=None, ):
+def send_email(subject,recipients,text_body,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(
             subject=subject,
