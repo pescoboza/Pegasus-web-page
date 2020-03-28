@@ -1,11 +1,11 @@
 from datetime import datetime
-from flask import render_template, redirect, url_for, request, session
+from flask import render_template, redirect, flash,url_for, request, session
 from .. import app, db
 from ..models.user import User
 from ..forms.register_form import RegisterForm
 from ..token import generate_confirmation_token
 from .user_confirmation import user_confirmation
-from send_email import send_email
+from ..send_email import send_email
 
 # ---------------------------------------------------
 # Sign up page
@@ -42,8 +42,6 @@ def register():
                 form.password.data,
                 datetime.now())
 
-            # TODO: Add email confirmation to user registration
-
             # Add the new user to the database
             db.session.add(new_user)
             db.session.commit()
@@ -51,13 +49,16 @@ def register():
             # Generation of confirmation email
             token = generate_confirmation_token(new_user.email)
             confirm_url = url_for("register",token=token)
-            html = render_template(
-                "user_confirmation.html", confirm_url=confirm_url)
+            html = render_template("user_confirmation.html", 
+                                confirm_url=confirm_url)
             subject = "Pegasus: please confirm your email!"
             send_email(subject=subject,
                        recipients=[new_user.email],
                        html_body=html)
             flash("A confirmation email has been sent to your email.","success")
-            return redirect(url_for("home"))
+            return redirect(url_for("index"))
 
     return render_template("register.html", form=form)
+
+# TODO: Figure out how to send confiration emails. 
+# TODO: Figure out how to correctly display flashes.

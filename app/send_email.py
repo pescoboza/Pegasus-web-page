@@ -2,9 +2,9 @@ from threading import Thread
 from flask import render_template
 from flask_mail import Mail, Message
 from . import app, mail
-from .decorators import async
+from .decorators import async_
 
-@async 
+@async_ 
 def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(
@@ -17,7 +17,7 @@ def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=Non
             html=html_body 
             )
         return "200"    
-    except Exception, e:
+    except Exception as e:
         return str(e)
 
 
@@ -36,5 +36,5 @@ def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None
             )
         mail.send(msg)
         return "200"    
-    except Exception, e:
+    except Exception as e:
         return str(e)
