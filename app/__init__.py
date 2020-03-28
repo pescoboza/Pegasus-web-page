@@ -26,8 +26,7 @@ db.create_all()
 
 # TODO: Remove this mock admin account
 from datetime import datetime
-from passlib.hash import sha256_crypt
-me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon",sha256_crypt.hash("lolo23jhon"),datetime.now())
+me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon","lolo23jhon",datetime.now())
 me.admin = True
 me.confirmed = True
 me.confirmed_on = datetime.now()

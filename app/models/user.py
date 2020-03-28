@@ -1,3 +1,4 @@
+from passlib.hash import sha256_crypt
 from app import db
 from . import FIELD_LENGTHS as flen
 
@@ -20,7 +21,7 @@ class User(db.Model):
         self.last_name = last_name
         self.email = email
         self.username = username
-        self.password = password
+        self.password = sha256_crypt.hash(password)
         self.created_on = created_on
         self.confirmed = False
         self.confirmed_on = None

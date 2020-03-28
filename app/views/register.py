@@ -1,6 +1,5 @@
 from datetime import datetime
 from flask import render_template, redirect, url_for, request, session
-from passlib.hash import sha256_crypt
 from .. import app, db
 from ..models.user import User
 from ..forms.register_form import RegisterForm     
@@ -38,7 +37,7 @@ def register():
                 form.last_name.data,
                 form.email.data,
                 form.username.data,
-                sha256_crypt.hash(form.password.data), 
+                form.password.data, 
                 datetime.now())  
 
             # TODO: Add email confirmation to user registration
@@ -49,6 +48,6 @@ def register():
 
             token = generate_confirmation_token(new_user.email)
 
-            return user_confirmation()
+            return user_confirmation(token)
 
     return render_template("sign_up.html", form=form)
