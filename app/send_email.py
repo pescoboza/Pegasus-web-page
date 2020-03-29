@@ -9,7 +9,7 @@ def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=Non
     try:
         msg = Message(
             subject=subject,
-            sender=app.config["MAIL_USERNAME"],
+            sender=app.config["MAIL_DEFAULT_SENDER"],
             recipients=recipients,
             cc=cc,
             bcc=bcc,
@@ -20,14 +20,12 @@ def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=Non
     except Exception as e:
         return str(e)
 
-
-
-# TODO: set MAX_EMAIL flag in config.py.
+from sys import stderr
 def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(
             subject=subject,
-            sender=app.config["MAIL_USERNAME"],
+            sender=app.config["MAIL_DEFAULT_SENDER"],
             recipients=recipients,
             cc=cc,
             bcc=bcc,
@@ -37,4 +35,5 @@ def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None
         mail.send(msg)
         return "200"    
     except Exception as e:
-        return str(e)
+        print(e,file=stderr)
+        raise e

@@ -53,11 +53,8 @@ def register():
             html = render_template("user_confirmation.html", 
                                 confirm_url=confirm_url)
             subject = "Pegasus: please confirm your email!"
-            status = send_email(subject=subject,
-                       recipients=[new_user.email],
-                       html_body=html)
-            # TODO: Remove the printing of the confirmation url.
-            print(confirm_url, file=sys.stderr)
+            status = send_email(subject=subject, recipients=[new_user.email], html_body=html)
+            
             flash("A confirmation email has been sent to your email.","success")
             return redirect(url_for("index"))
 
