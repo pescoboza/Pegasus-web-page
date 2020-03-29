@@ -4,6 +4,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
+# TODO: Remove this import from final version and add heroku hostname.
+from get_local_host import get_local_host
 
 # ---------------------------------------------------
 # Configuration setup
@@ -11,10 +13,9 @@ from flask_mail import Mail
 app = Flask(__name__)
 app.config.from_object("config.Config")
 
-db = SQLAlchemy(app)
-
 mail = Mail(app)
 
+db = SQLAlchemy(app)
 
 # ---------------------------------------------------
 # Main function
@@ -35,9 +36,42 @@ if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
     db.session.add(me)
     db.session.commit()
 
-c = app.config
-for i in c:
-    print("{}:\t{}".format(i,c[i]),file=sys.stderr)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
+# # -----------------------------------------------------
+# #                    EMAIL TESTING
+# # -----------------------------------------------------
+# from flask import Flask
+# from flask_mail import Mail, Message
+
+# app = Flask(__name__)
+
+# #mail=Mail(app)
+
+# app.config['MAIL_SERVER']='smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = 'pegasus.csn@gmail.com'
+# app.config['MAIL_PASSWORD'] = 'std::cout<<"HelloWorld!"<<std::endl;'
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+# app.config['MAIL_DEFAULT_SENDER'] = 'pegasus.csn@gmail.com'
+# app.config['MAIL_ASCII_ATTACHMENTS'] = True
+# app.config['DEBUG'] = True
+
+# mail = Mail(app)
+
+# @app.route("/send")
+# def index():
+#     try:
+#         msg = Message('Subject', recipients = ["lolorotmg@gmail.com"])
+#         msg.body = "Hello Flask message sent from Flask-Mail"
+#         msg.html = "<b>Javivi, si estas viendo esto es porque descrubrí como usar la tenología de nuestros ancestros para mandar correos con una pagina web. Solo para confirmar mandame una imagen de un delfín por whatsapp.</b>"
+#         mail.send(msg)
+#     except Exception as e:
+#         raise e
+#     return "Check Your Inbox !!!"
+
+# if __name__ == '__main__':
+#     app.run(debug = True)
