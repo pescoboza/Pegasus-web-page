@@ -14,9 +14,10 @@ class User(db.Model):
     admin = db.Column(db.Boolean, default=False)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
+    newsletter = db.Column(db.Boolean)
 
 
-    def __init__(self, first_name, last_name, email, username, password, registered_on):
+    def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -25,6 +26,7 @@ class User(db.Model):
         self.registered_on = registered_on
         self.confirmed = False
         self.confirmed_on = None
+        self.newsletter = False
 
     # TODO: Implement check for authentication
     def is_authenthicated():
