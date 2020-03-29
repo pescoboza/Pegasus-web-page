@@ -40,5 +40,5 @@ def admin_required(func):
         if user != None and user.admin == True:
             return func(*args, **kwargs)
         else:
-            return redirect(url_for("/home"))
+            return redirect(url_for("index"))
     return decorated_function

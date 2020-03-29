@@ -6,7 +6,7 @@ from ..forms.register_form import RegisterForm
 from ..token import generate_confirmation_token
 from .user_confirmation import user_confirmation
 from ..send_email import send_email
-
+import sys
 # ---------------------------------------------------
 # Sign up page
 # ---------------------------------------------------
@@ -40,7 +40,8 @@ def register():
                 form.email.data,
                 form.username.data,
                 form.password.data,
-                datetime.now())
+                datetime.now(),
+                form.newsletter.data)
 
             # Add the new user to the database
             db.session.add(new_user)
@@ -48,13 +49,14 @@ def register():
 
             # Generation of confirmation email
             token = generate_confirmation_token(new_user.email)
-            confirm_url = url_for("register",token=token)
+            confirm_url = url_for("user_confirmation",token=token)
             html = render_template("user_confirmation.html", 
                                 confirm_url=confirm_url)
             subject = "Pegasus: please confirm your email!"
-            send_email(subject=subject,
+            status = send_email(subject=subject,
                        recipients=[new_user.email],
                        html_body=html)
+            print(confirm_url, file=sys.stderr)
             flash("A confirmation email has been sent to your email.","success")
             return redirect(url_for("index"))
 

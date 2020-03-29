@@ -6,14 +6,16 @@
     <nav>
         <!-- TODO: Add check for user authentication in template -->
         <h1>PEGASUS</h1>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <h3>{{message}}</h3>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
     </nav>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <!-- TODO: Style notification/flash -->
+    <!-- TODO: Add close button for notifications -->>
+    <div class="message {{message.type}}">{{message}}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </head>
 
 <body>

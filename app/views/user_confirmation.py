@@ -23,4 +23,4 @@ def user_confirmation(token):
         db.session.add(user)
         db.session.commit()
         flash("You succesfully confirmed your account. Thank you!","success")
-    return redirect(url_for("/home"))
+    return redirect(url_for("index"))

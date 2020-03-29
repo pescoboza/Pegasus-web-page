@@ -26,8 +26,4 @@ class User(db.Model):
         self.registered_on = registered_on
         self.confirmed = False
         self.confirmed_on = None
-        self.newsletter = False
-
-    # TODO: Implement check for authentication
-    def is_authenthicated():
-        raise Exception("WRITE ME!")
+        self.newsletter = newsletter
