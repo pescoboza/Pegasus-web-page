@@ -49,7 +49,7 @@ def register():
 
             # Generation of confirmation email
             token = generate_confirmation_token(new_user.email)
-            confirm_url = url_for("user_confirmation",token=token)
+            confirm_url = url_for("user_confirmation",token=token, _external=True)
             html = render_template("user_confirmation.html", 
                                 confirm_url=confirm_url)
             subject = "Pegasus: please confirm your email!"
