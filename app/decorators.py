@@ -17,7 +17,7 @@ def check_confirmed(func):
         user = db.session.query(User).filter(User.username == session["username"]).first_or_404()
         if user.confirmed == False:
             flash("Please confirm your account.","warning")
-            return redirect(url_for("/confirm"))
+            return redirect(url_for("confirm"))
         return func(*args, **kwargs)
     return decorated_function
 
