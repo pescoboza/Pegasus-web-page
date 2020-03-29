@@ -16,7 +16,7 @@ def user_confirmation(token):
     user = db.session.query(User).filter(User.email == email).first_or_404()
     if user != None and user.confirmed:
         flash("Acount already confirmed. Please login.","success")
-        return redirect(url_for("/login"))
+        return redirect(url_for("login"))
     else:
         user.confirmed = True
         user.confirmed_on = datetime.now()

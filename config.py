@@ -16,12 +16,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = get_local_host()
 
     # Email settings
-    # TODO: Fill in email settings
-    # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
     MAIL_SERVER = "smpt.gmail.com"
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     MAIL_USERNAME = "pegasus.csn@gmail.com"
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
-
+    MAIL_SUPPRESS_SEND = False
