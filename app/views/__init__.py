@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, flash
 from ..models.user import User
 from .. import app, db
 from ..forms.login_form import LoginForm

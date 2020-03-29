@@ -1,11 +1,9 @@
-from flask import render_template, request, session
+from flask import render_template, request, flash, session
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
 from passlib.hash import sha256_crypt
-
-import sys
-
+from time import sleep
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
@@ -21,7 +19,7 @@ def login():
         password = form.password.data
         
         # Query for the user with that username
-        user =  db.session.query(User).filter(User.username == "mono").first() 
+        user =  db.session.query(User).filter(User.username == username).first() 
 
         # Check the password
         if user != None and sha256_crypt.verify(password,user.password):

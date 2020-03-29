@@ -1,7 +1,15 @@
+from threading import Thread
 from functools import wraps
 from flask import flash, redirect, url_for, session
 from . import db
 from .models.user import User
+
+def async_(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        thread = Thread(tartet=func, args=args,kwargs=kwargs)
+        thread.start()
+    return decorated_function
 
 def check_confirmed(func):
     @wraps(func)
@@ -9,7 +17,7 @@ def check_confirmed(func):
         user = db.session.query(User).filter(User.username == session["username"]).first_or_404()
         if user.confirmed == False:
             flash("Please confirm your account.","warning")
-            return redirect(url_for("/confirm"))
+            return redirect(url_for("confirm"))
         return func(*args, **kwargs)
     return decorated_function
 
@@ -32,5 +40,5 @@ def admin_required(func):
         if user != None and user.admin == True:
             return func(*args, **kwargs)
         else:
-            return redirect(url_for("/home"))
+            return redirect(url_for("index"))
     return decorated_function

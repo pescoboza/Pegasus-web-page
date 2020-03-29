@@ -3,8 +3,8 @@ from get_local_host import get_local_host
 class Config:
 
     # General config
-    FLASK_ENV = "development"
-    TESTING = True
+    ENV = "development"
+    TESTING = False
     DEBUG = True
     SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
     # TODO: Add security password salt
@@ -16,12 +16,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = get_local_host()
 
     # Email settings
-    # TODO: Fill in email settings
-    # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
     MAIL_SERVER = "smpt.gmail.com"
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
     MAIL_USERNAME = "pegasus.csn@gmail.com"
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
-
+    MAIL_SUPPRESS_SEND = False
