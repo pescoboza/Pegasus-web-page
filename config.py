@@ -4,7 +4,7 @@ class Config:
 
     # General config
     ENV = "development"
-    TESTING = True
+    TESTING = False
     DEBUG = True
     SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
     # TODO: Add security password salt

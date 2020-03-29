@@ -1,9 +1,9 @@
-from flask import render_template, request, flash,session
+from flask import render_template, request, flash, session
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
 from passlib.hash import sha256_crypt
-
+from time import sleep
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
@@ -12,11 +12,6 @@ def login():
 
     form = LoginForm()
     message = None
-    # TODO: Remove test flashes
-    flash("TEST")
-    flash("TEST")
-    flash("TEST")
-    flash("TEST")
 
     # Check for a POST request
     if request.method == "POST" and form.validate_on_submit():
