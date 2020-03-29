@@ -20,7 +20,6 @@ def send_async_email(subject,recipients,text_body,html_body=None,cc=None,bcc=Non
     except Exception as e:
         return str(e)
 
-from sys import stderr
 def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None):
     try:
         msg = Message(
@@ -35,5 +34,4 @@ def send_email(subject,recipients,text_body=None,html_body=None,cc=None,bcc=None
         mail.send(msg)
         return "200"    
     except Exception as e:
-        print(e,file=stderr)
         raise e
