@@ -12,12 +12,9 @@ EXCLUDED_CHARACTERS = ('?')
 INTENTS_FILENAME = "intents.json"
 MODEL_FILENAME = "model.h5"
 
-
 stemmer = nltk.LancasterStemmer()
 
 
-# Returns all the the data for responses from the intents file.
-# Must be the same the bot was trained on.
 def load_intents_data(filename):
     data = {}
     with open(filename) as file:
@@ -42,8 +39,6 @@ def load_intents_data(filename):
 
     return (data, words, labels)
 
-
-# Create a one-hot enconded word bag
 def word_bag(user_input, words):
     bag = [0 for _ in range(len(words))]
 
@@ -58,11 +53,6 @@ def word_bag(user_input, words):
     bag = np.array(bag)
     bag = bag.reshape(1, max(bag.shape))
     return bag
-
-
-DATA, WORDS, LABELS = load_intents_data(INTENTS_FILENAME)
-MODEL = load_model(MODEL_FILENAME)
-
 
 def respond(user_input):
     result = np.argmax(MODEL.predict(word_bag(user_input, WORDS)))

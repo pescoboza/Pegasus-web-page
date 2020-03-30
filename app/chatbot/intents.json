@@ -2,7 +2,7 @@
     "intents": [{
             "tag": "greeting",
             "patterns": ["Hi", "Hello", "How are you?"],
-            "responses": ["Hello.", "Good to see you.", "Hi there."],
+            "responses": ["Hello.", "Good to see you.", "Nice to see you.", "Great to see you.", "Hi there.", "Oh, hi there.", ],
             "context_set": []
         },
         {
