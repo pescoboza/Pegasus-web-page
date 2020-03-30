@@ -16,6 +16,9 @@ gunicorn = "*"
 flask-wtf = "*"
 passlib = "*"
 flask-mail = "*"
+tensorflow = "*"
+numpy = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"

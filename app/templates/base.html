@@ -21,5 +21,13 @@
 <body>
     {% block content %}{% endblock %}
 </body>
+<!-- TODO: Position chat window and add animations. -->
+{% if chat %}
+{% for message in chat.messages %}
+
+<p>{{message.sender}}{{message.content}}</p><br>
+
+{% endfor %}
+{% endif %}
 
 </html>
