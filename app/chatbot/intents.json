@@ -1,0 +1,45 @@
+{
+    "intents": [{
+            "tag": "greeting",
+            "patterns": ["Hi", "Hello", "How are you?"],
+            "responses": ["Hello.", "Good to see you.", "Hi there."],
+            "context_set": []
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["bye", "See you later", "Goodbye", "Have a good day"],
+            "responses": ["Goodbye!", "See you again soon.", "See you later."],
+            "context_set": []
+        },
+        {
+            "tag": "who_are_you",
+            "patterns": ["Who are you?", "What is your name?", "Who am i talking to?"],
+            "responses": ["My name is Peggy, I'm a robot assistant made by the Pegasus development team.\nWhat can I help you with?"],
+            "context_set": []
+        },
+        {
+            "tag": "what_is_pegasus",
+            "patterns": ["What is Pegasus?", "What is this?", "Who do you work for?", "Where am I?"],
+            "responses": ["Pegasus is a novel student group founded by the students of ITC of TEC CSN.\nThwy work with software and AI."],
+            "context_set": []
+        },
+        {
+            "tag": "activities",
+            "patterns": ["What do they do?", "What can I do?", "What does Pegasus do?", "What do they do in Pegasus?"],
+            "responses": ["Mostly software projects with focus on artificial intelligence.\n In Pegasus we also impart programming courses and participate in bootcamps.", "Most things related to software development and coding."],
+            "context_set": []
+        },
+        {
+            "tag": "more_info",
+            "patterns": ["More information.", "Where can I get more information?", "Tell me more.", "Where can I know more?"],
+            "responses": ["Take a look around. You'll find more about us here. You can also find us on social networks."],
+            "context_set": []
+        },
+        {
+            "tag": "join_group",
+            "patterns": ["I want to join Pegasus.", "Join Pegasus.", "Join you.", "How can I join you?", "I want to enter the group.", "Are you accepting members?", "I want to be a member.", "What do I need to join?"],
+            "responses": ["Great! Just contact my makers. In the contacts tabs you will find their information.\n Pegasus is always in need of passionate hard-working members.\n I'm sure they might find a spot for you too!"],
+            "context_set": []
+        }
+    ]
+}
