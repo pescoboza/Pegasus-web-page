@@ -8,7 +8,7 @@
         {
             "tag": "goodbye",
             "patterns": ["bye", "See you later", "Goodbye", "Have a good day"],
-            "responses": ["Goodbye!", "See you again soon.", "See you later."],
+            "responses": ["Goodbye!", "Bye.", "See you.", "See you again soon.", "See you later.", "Until next time.", "Bye bye!", "Ciao."],
             "context_set": []
         },
         {
