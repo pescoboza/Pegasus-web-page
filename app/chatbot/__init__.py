@@ -17,9 +17,9 @@ stemmer = nltk.LancasterStemmer()
 
 # Returns all the the data for responses from the intents file.
 # Must be the same the bot was trained on.
-def load_intents_data(t_filename):
+def load_intents_data(filename):
     data = {}
-    with open(t_filename) as file:
+    with open(filename) as file:
         data = json.load(file)
 
     words = []
@@ -47,14 +47,14 @@ def load_intents_data(t_filename):
 
 
 # Create a one-hot enconded word bag
-def word_bag(t_str, t_words):
-    bag = [0 for _ in range(len(t_words))]
+def word_bag(string, words):
+    bag = [0 for _ in range(len(words))]
 
-    s_words = nltk.word_tokenize(t_str)
+    s_words = nltk.word_tokenize(string)
     s_words = [stemmer.stem(w.lower()) for w in s_words]
 
     for s in s_words:
-        for i, w in enumerate(t_words):
+        for i, w in enumerate(words):
             if w == s:
                 bag[i] = 1
 
@@ -62,30 +62,20 @@ def word_bag(t_str, t_words):
     bag = bag.reshape(1, max(bag.shape))
     return bag
 
+DATA, WORDS, LABELS, _, _ = load_intents_data(INTENTS_FILENAME)
+MODEL = load_model(MODEL_FILENAME)
+
 # Talk with the bot
-def chat(t_model, t_data, t_words, t_labels, t_quit_cmd="quit"):
-    print("Talk with me!")
+def respond(user_input):
+    result = np.argmax(MODEL.predict(WORD_BAG(user_input, WORDS)))
+    tag = LABELS[result]
 
-    while True:
-        inp = input("YOU: ")
-
-        if inp.lower() == t_quit_cmd:
-            break
-
-        result = np.argmax(t_model.predict(word_bag(inp, t_words)))
-        tag = t_labels[result]
-
-        response = str()
-        for intent in t_data["intents"]:
-            if tag == intent["tag"]:
-                response = random.choice(intent["responses"])
-
-        print(response)
-
+    response = str()
+    for intent in DATA["intents"]:
+        if tag in DATA["intents"]:
+            responser = random.choice(intent["responses"])
+    
+    return response
 
 if __name__ == "__main__":
-
-    data, words, labels, _, _ = load_intents_data(INTENTS_FILENAME)
-    model = load_model(MODEL_FILENAME)
-
-    chat(t_data=data, t_model=model, t_words=words, t_labels=labels)
+    pass
