@@ -6,6 +6,7 @@ import json
 import random
 
 
+nltk.download("punkt")
 
 EXCLUDED_CHARACTERS = ('?')
 INTENTS_FILENAME = "intents.json"
@@ -24,16 +25,12 @@ def load_intents_data(filename):
 
     words = []
     labels = []
-    docs_x = []
-    docs_y = []
 
     for intent in data["intents"]:
         for pattern in intent["patterns"]:
 
             wrds = nltk.word_tokenize(pattern)
             words.extend(wrds)
-            docs_x.append(wrds)
-            docs_y.append(intent["tag"])
 
             if intent["tag"] not in labels:
                 labels.append(intent["tag"])
@@ -43,14 +40,14 @@ def load_intents_data(filename):
     words = sorted(list(set(words)))
     labels = sorted(labels)
 
-    return (data, words, labels, docs_x, docs_y)
+    return (data, words, labels)
 
 
 # Create a one-hot enconded word bag
-def word_bag(string, words):
+def word_bag(user_input, words):
     bag = [0 for _ in range(len(words))]
 
-    s_words = nltk.word_tokenize(string)
+    s_words = nltk.word_tokenize(user_input)
     s_words = [stemmer.stem(w.lower()) for w in s_words]
 
     for s in s_words:
@@ -62,19 +59,18 @@ def word_bag(string, words):
     bag = bag.reshape(1, max(bag.shape))
     return bag
 
-DATA, WORDS, LABELS, _, _ = load_intents_data(INTENTS_FILENAME)
+
+DATA, WORDS, LABELS = load_intents_data(INTENTS_FILENAME)
 MODEL = load_model(MODEL_FILENAME)
 
-# Talk with the bot
-def respond(user_input):
-    result = np.argmax(MODEL.predict(WORD_BAG(user_input, WORDS)))
-    tag = LABELS[result]
 
+def respond(user_input):
+    result = np.argmax(MODEL.predict(word_bag(user_input, WORDS)))
+    tag = LABELS[result]
     response = str()
     for intent in DATA["intents"]:
-        if tag in DATA["intents"]:
-            responser = random.choice(intent["responses"])
-    
+        if tag == intent["tag"]:
+            response = random.choice(intent["responses"])
     return response
 
 if __name__ == "__main__":
