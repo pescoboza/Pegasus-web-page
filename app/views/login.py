@@ -22,9 +22,8 @@ def login():
         user =  db.session.query(User).filter(User.username == username).first() 
 
         # Check the password
-        if user != None and sha256_crypt.verify(password,user.password):
+        if user != None and sha256_crypt.verify(password,user.password) and user.confirmed == True:
             # TODO: Add logout option session.
-
             session["logged_in"] = True
             session["username"] = username
 
