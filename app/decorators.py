@@ -4,13 +4,6 @@ from flask import flash, redirect, url_for, session
 from . import db
 from .models.user import User
 
-def async_(func):
-    @wraps(func)
-    def decorated_function(*args, **kwargs):
-        thread = Thread(tartet=func, args=args,kwargs=kwargs)
-        thread.start()
-    return decorated_function
-
 def check_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):

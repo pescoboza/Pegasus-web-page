@@ -21,16 +21,24 @@ def login():
         # Query for the user with that username
         user =  db.session.query(User).filter(User.username == username).first() 
 
-        # Check the password
-        if user != None and sha256_crypt.verify(password,user.password):
-            # TODO: Add logout option session.
-
-            session["logged_in"] = True
-            session["username"] = username
-
-
-            return render_template("index.html", user=user)
-
-        message = "Invalid credentials. Please try again."
+        # Check username
+        if user != None:
         
-    return render_template("login.html", form=form, message=message)
+            # Check if account confirmed
+            if user.confirmed == True:
+                
+                # Check if password correct
+                if sha256_crypt.verify(password,user.password):
+                
+                    # TODO: Add logout option session.
+                    session["logged_in"] = True
+                    session["username"] = username
+                    
+                    # Login succesful
+                    return render_template("index.html", user=user)
+            else:
+                flash("Please confirm your account.")
+        else:
+            flash("Invalid credentials. Please try again.")
+        
+    return render_template("login.html", form=form)
