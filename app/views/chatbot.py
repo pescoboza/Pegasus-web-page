@@ -15,7 +15,7 @@ class Message():
 
 @app.route("/chatbot", request=["POST"]):
 def chatbot(username, botname, user_messages=[], bot_messages=[])    
-form = ChatForm()
+    form = ChatForm()
     if request() == "POST" and form.validate_on_submit:
         
         user_msg = form.user_response.data
