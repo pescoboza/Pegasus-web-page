@@ -23,4 +23,4 @@ form = ChatForm()
         user_messages.append(Message(username, user_msg))
         bot_messages.append(Message(botname, respond(user_msg)))
         
-        render_template("chat.html", user_messages=user_messages, others_messages=bot_messages)
+    render_template("chat.html", user_messages=user_messages, others_messages=bot_messages)
