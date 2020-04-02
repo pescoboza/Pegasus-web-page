@@ -30,3 +30,7 @@ def reset_password(token, email):
         return redirect(url_for("login"))
     
     return render_template("reset_password.html", form=form)
+
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+    #         TODO: FIX PASSWORD RESET SYSTEM         #
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
