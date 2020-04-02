@@ -25,4 +25,4 @@ def request_password_change():
 
         flash("A password rest token has been sent to your email.")
 
-    return render_template("reset_password.html", form=form)
+    return render_template("request_password_change.html", form=form)
