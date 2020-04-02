@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 from .models.user import User
 from .views import *
+from .views.request_password_change import request_password_change
 
 db.create_all()
 
@@ -39,3 +40,7 @@ if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
 
 if __name__ == "__main__":
     app.run()
+
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+    #         TODO: FIX PASSWORD RESET SYSTEM         #
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
