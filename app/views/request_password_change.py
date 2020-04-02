@@ -16,7 +16,7 @@ def request_password_change():
 
         if user != None:
             token = generate_confirmation_token(user.email)
-            confirmation_url = url_for("reset_password", token=token, _external=True)
+            confirmation_url = url_for("reset_password", token=token, email=email, _external=True)
             
             text_body = "We received a request from you to reset your password. Please follow the link to do so:\n" + confirmation_url
             html_body = render_template("password_reset_confirmation_email.html", confirmation_url=confirmation_url)
@@ -24,5 +24,5 @@ def request_password_change():
             send_email("Password change request.", [user.email], text_body=text_body, html_body=html_body)
 
         flash("A password rest token has been sent to your email.")
-    
+
     return render_template("password_reset.html", form=form)

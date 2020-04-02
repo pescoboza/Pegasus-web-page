@@ -7,13 +7,14 @@ from ..forms.reset_password_form import ResetPasswordForm
 
 # The page with the form in which the actual password is sent.
 @app.route("/reset-password/<token>", methods=["GET", "POST"])
-def reset_password(username):
+def reset_password(token, email):
     form = ResetPasswordForm()
 
     if request.method == "POST" and form.validate_on_submit():
         password = form.password.data
         password = sha256_crypt.hash(password)
-        user = db.session.query(User).filter(User.username == username).first()
+        # TODO: Manage 404 case.
+        user = db.session.query(User).filter(User.email == email).first()
 
         if user == None:
             return redirect(url_for("not_found"))
