@@ -21,6 +21,6 @@ def request_password_change():
             html_body = render_template("password_reset_confirmation_email.html", confirmation_url=confirmation_url)
 
             send_email("Password change request.", [user.email], text_body=text_body, html_body=html_body)
-           
         flash("A password rest token has been sent to your email.")
+    
     render_template("password_reset.html" , form=form)
