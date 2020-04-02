@@ -1,13 +1,18 @@
-from flask import request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash
 from passlib.hash import sha256_crypt
 from .. import app, db
 from ..models.user import User
 from ..forms.reset_password_form import ResetPasswordForm
+from ..token import confirm_token
 
 
 # The page with the form in which the actual password is sent.
-@app.route("/reset-password/<token>", methods=["GET", "POST"])
+@app.route("/reset-password/<email>/<token>", methods=["GET", "POST"])
 def reset_password(token, email):
+
+    if not confirm_token(token):
+        redirect(url_for("not_found"))
+
     form = ResetPasswordForm()
 
     if request.method == "POST" and form.validate_on_submit():
