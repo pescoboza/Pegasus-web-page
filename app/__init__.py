@@ -22,6 +22,7 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 from .models.user import User
 from .views import *
+from .views.request_password_change import request_password_change
 
 db.create_all()
 

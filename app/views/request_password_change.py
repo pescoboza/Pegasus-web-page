@@ -5,7 +5,7 @@ from ..forms.request_password_change_form import RequestPasswordChangeForm
 from ..token import generate_confirmation_token
 from ..send_email import send_email
 
-@app.route("/forgot-password", request=["POST"])
+@app.route("/forgot-password", methods=["GET","POST"])
 def request_password_change():
     form = RequestPasswordChangeForm()
 
