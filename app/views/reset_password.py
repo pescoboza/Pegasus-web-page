@@ -27,6 +27,6 @@ def reset_password(token, email):
         db.session.add(user)
         db.session.commit()
         flash("Your account's password has been reset.", "success")
-        redirect(url_for("login"))
+        return redirect(url_for("login"))
     
-    render_template("reset_password.html", form=form)
+    return render_template("reset_password.html", form=form)
