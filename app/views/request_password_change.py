@@ -9,7 +9,7 @@ from ..send_email import send_email
 def request_password_change():
     form = RequestPasswordChangeForm()
 
-    if request == "POST" and form.validate_on_submit():
+    if request.method == "POST" and form.validate_on_submit():
         email = form.email.data
         user = db.session.query(User).filter(User.email == email).first()
 
@@ -23,4 +23,4 @@ def request_password_change():
             send_email("Password change request.", [user.email], text_body=text_body, html_body=html_body)
         flash("A password rest token has been sent to your email.")
     
-    render_template("password_reset.html" , form=form)
+    return render_template("password_reset.html", form=form)

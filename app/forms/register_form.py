@@ -11,7 +11,7 @@ class RegisterForm(FlaskForm):
     username = TextField(label="Username", validators=[
                          Required(), Length(**flen["username"])])
     email = TextField(label="Email", validators=[
-                      Required(), Length(**flen["email"])])
+                      Required(), Length(**flen["email"]), Email()])
 
     password = PasswordField(label="Password", validators=[
                                    Required(), 
