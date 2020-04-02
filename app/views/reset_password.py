@@ -6,11 +6,11 @@ from ..forms.reset_password_form import ResetPasswordForm
 
 
 # The page with the form in which the actual password is sent.
-@app.route("/reset-password/<token>", request=["GET", "POST"])
+@app.route("/reset-password/<token>", methods=["GET", "POST"])
 def reset_password(username):
     form = ResetPasswordForm()
 
-    if request == "POST" and form.validate_on_submit():
+    if request.method == "POST" and form.validate_on_submit():
         password = form.password.data
         password = sha256_crypt.hash(password)
         user = db.session.query(User).filter(User.username == username).first()
