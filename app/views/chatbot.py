@@ -1,12 +1,17 @@
 from flask import request, render_template
 from .. import app
 from ..forms.chat_form import ChatForm
-from ..chatbot import respond
+
+# TODO: Change the chatbot from Gilbert (mock testing bot) to Peggy (actual bot with neural network).
+#from ..chatbot import respond
+import random
+def respond(user_input):
+    return random.choice(["H3ll0, 1 4m GI-L83RT, th3 r0b0t.", "H0w c4n 1 h3lp y0u?", "D1d y0u kn0w th4t 1'm 4 r0b0t?", "01001000010001010100110001001100010011110000110100001010", "01001000010010010000110100001010"])
 
 
 # TODO: Create html for chatbot view.
 # TODO: Figure out how to fit chatbot view in base.html and make it work.
-# TODO: Figure out how to test out TensorFlow 2.x with Flask.
+# TODO: Figure out how to test TensorFlow 2.x with Flask (TF needs a CPU with AVX instructions and wont install locally).
 
 class Message():
     def __init__(sender, content):
