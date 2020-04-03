@@ -13,6 +13,9 @@ def login():
     form = LoginForm()
     message = None
 
+    valid_credentials = False
+
+
     # Check for a POST request
     if request.method == "POST" and form.validate_on_submit():
         username = form.username.data
@@ -39,6 +42,11 @@ def login():
             else:
                 flash("Please confirm your account.")
         else:
-            flash("Invalid credentials. Please try again.")
+            valid_credentials = False
+    else:
+        valid_credentials = False
+
+    if not valid_credentials:
+        flash("Invalid credentials. Please try again.")
         
     return render_template("login.html", form=form)
