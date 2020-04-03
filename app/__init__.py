@@ -40,3 +40,7 @@ if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
 
 if __name__ == "__main__":
     app.run()
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+#           TODO: SOLVE MISSING FLASHES           #
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
