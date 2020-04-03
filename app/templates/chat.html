@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block chat %}
+
+{% if chat_messages %}
+{% for chat_message in chat_messages %}
+
+<div class="chat-msg {% if chat_message.from_you %}from-you{% endif %}">
+    <p>{{chat_message.sender}}: {{chat_message.content}}</p>
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% if form %}
+<form action="" , method="POST">
+    <div class="container">
+        {{form.user_input.label}}
+        {{form.user_input}}
+        <input type="input" value="Send">
+    </div>
+</form>
+{% endif %}
+
+{% endblock %}
