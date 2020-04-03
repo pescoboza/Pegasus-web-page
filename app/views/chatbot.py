@@ -20,7 +20,7 @@ def respond(user_input):
 # TODO: Figure out how to test TensorFlow 2.x with Flask (TF needs a CPU with AVX instructions and wont install locally).
 
 class ChatMessage():
-    def __init__(sender, content, from_you=False):
+    def __init__(self, sender, content, from_you=False):
         self.sender = sender
         self.content = content
         self.from_you = from_you
@@ -33,8 +33,8 @@ def chatbot(username="You", botname="Gilbert", chat_messages=[]):
 
         user_msg = form.user_response.data
         bot_msg = respond(user_msg)
-
-        chat_messages.append(ChatMessage(username, user_msg, True))
+        msg = ChatMessage(username, user_msg, True)
+        chat_messages.append(msg)
         chat_messages.append(ChatMessage(botname, bot_msg, False))
 
     return render_template("chat.html", chat_messages=chat_messages, form=form)

@@ -14,10 +14,11 @@
 
 {% if form %}
 <form action="" , method="POST">
+    {{form.csrf}}
     <div class="container">
-        {{form.user_input.label}}
-        {{form.user_input}}
-        <input type="input" value="Send">
+        {{form.user_response.label}}
+        {{form.user_response}}
+        <input type="submit" value="Send">
     </div>
 </form>
 {% endif %}
