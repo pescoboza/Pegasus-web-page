@@ -11,9 +11,15 @@
 
     <nav>
         <!-- TODO: Add check for user authentication in template -->
-        <h1>PEGASUS</h1>
+        <h1>Pegasus</h1>
         <!-- NOTE: Current_user from flask_login. -->
+        {% if current_user.username %}
         {{current_user.username}}
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login</a>
+        {% endif %}
+
     </nav>
     {% with messages = get_flashed_messages() %}
     {% if messages %}

@@ -1,13 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if user %}
-<!--This is a placeholder for development.-->
-<h2>Logged in as {{user.username}}</h2>
-{% else %}
-<a href="/login">Login</a>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo soluta omnis impedit explicabo molestias quam
     recusandae laboriosam suscipit dolorum at repellendus facere minus sit id, iusto ea maiores dolore odit!</p>
-{% endif %}
 <img src="../static/pegasus-logo.png" width="250px" alt="Pegasus Logo">
 {% endblock %}
