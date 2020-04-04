@@ -1,7 +1,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PEGASUS</title>
+    <title>
+        {% if title %}
+        {{title}}
+        {% else %}
+        Pegasus
+        {% endif %}
+    </title>
 
     <nav>
         <!-- TODO: Add check for user authentication in template -->
