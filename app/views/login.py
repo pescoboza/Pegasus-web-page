@@ -13,40 +13,44 @@ def login():
     form = LoginForm()
     message = None
 
-    valid_credentials = False
+    show_error_invalid_credentials = False
 
 
     # Check for a POST request
-    if request.method == "POST" and form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+    if request.method == "POST": 
         
-        # Query for the user with that username
-        user =  db.session.query(User).filter(User.username == username).first() 
+        if form.validate_on_submit():
+            username = form.username.data
+            password = form.password.data
+            
+            # Query for the user with that username
+            user =  db.session.query(User).filter(User.username == username).first() 
 
-        # Check username
-        if user != None:
-        
-            # Check if account confirmed
-            if user.confirmed == True:
+            # Check username
+            if user != None:
+            
+                # Check if account confirmed
+                if user.confirmed == True:
                 
-                # Check if password correct
-                if sha256_crypt.verify(password,user.password):
+                    # Check if password correct
+                    if sha256_crypt.verify(password,user.password):
                 
-                    # TODO: Add logout option session.
-                    session["logged_in"] = True
-                    session["username"] = username
+                        # TODO: Add logout option session.
+                        session["logged_in"] = True
+                        session["username"] = username
                     
-                    # Login succesful
-                    return render_template("index.html", user=user)
+                        # Login succesful
+                        return render_template("index.html", user=user)
+                    else:
+                        show_error_invalid_credentials = True
+                else:
+                    flash("Please confirm your account.")
             else:
-                flash("Please confirm your account.")
+                show_error_invalid_credentials = True
         else:
-            valid_credentials = False
-    else:
-        valid_credentials = False
+            show_error_invalid_credentials = True
 
-    if not valid_credentials:
+    if show_error_invalid_credentials:
         flash("Invalid credentials. Please try again.")
         
     return render_template("login.html", form=form)
