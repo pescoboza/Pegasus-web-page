@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import Required, Length, Email, EqualTo
+from wtforms import TextField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import ValidationError,Required, Length, Email, EqualTo
+from .. import db
 from ..models import FIELD_LENGTHS as flen
 
 class RegisterForm(FlaskForm):
@@ -23,3 +24,15 @@ class RegisterForm(FlaskForm):
 
     newsletter = BooleanField()
     accept_terms_and_conditions = BooleanField(validators=[Required()])
+
+    submit = SubmitField("Register")
+
+    def validate_username(self, username):
+        user = db.session.query(User).filter(User.username == username).first()
+        if user != None:
+            raise ValidationError("Please choose a different username.")
+
+    def validate_email(self, email):
+        user = db.session.query(User).filter(User.email == email).first()
+        if user != None:
+            raise ValidationError("Please use a different email address.")
