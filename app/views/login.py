@@ -29,6 +29,7 @@ def login():
         login_user(user, remember=form.remember.data)
         next_page = request.args.get("next")
 
+        # If the next page is not relative, return the user to index.
         if not next_page or url_parse(next_page).netloc !=  ' ':
             next_page = url_for("index")
 

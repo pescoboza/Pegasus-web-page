@@ -34,5 +34,5 @@ class User(UserMixin,db.Model):
         self.confirmed_on = None
         self.newsletter = newsletter
 
-    def check_password(password):
+    def check_password(self, password):
         return sha256_crypt.verify(password, self.password)

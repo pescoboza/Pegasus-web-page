@@ -12,8 +12,8 @@
     <nav>
         <!-- TODO: Add check for user authentication in template -->
         <h1>PEGASUS</h1>
-        <!-- TODO: Add user dependent content. -->
-        {% if %}
+        <!-- NOTE: Current_user from flask_login. -->
+        {{current_user.username}}
     </nav>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
