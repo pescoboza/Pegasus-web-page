@@ -13,7 +13,7 @@ def login():
     form = LoginForm()
     message = None
 
-    show_error = False
+    show_error_invalid_credentials = False
 
 
     # Check for a POST request
@@ -42,15 +42,15 @@ def login():
                         # Login succesful
                         return render_template("index.html", user=user)
                     else:
-                        show_error = True
+                        show_error_invalid_credentials = True
                 else:
                     flash("Please confirm your account.")
             else:
-                show_error = True
+                show_error_invalid_credentials = True
         else:
-            show_error = True
+            show_error_invalid_credentials = True
 
-    if show_error:
+    if show_error_invalid_credentials:
         flash("Invalid credentials. Please try again.")
         
     return render_template("login.html", form=form)
