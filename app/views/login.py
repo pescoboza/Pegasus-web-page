@@ -1,10 +1,10 @@
-from flask import render_template, request, flash, session, redirect, url_for
+from werkzeug.urls import url_parse
+from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
-from passlib.hash import sha256_crypt
-from time import sleep
+
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
@@ -27,6 +27,11 @@ def login():
             return redirect(url_for("login"))
         
         login_user(user, remember=form.remember.data)
-        return redirect(url_for("index"))
+        next_page = request.args.get("next")
+
+        if not next_page or url_parse(next_page).netloc !=  ' ':
+            next_page = url_for("index")
+
+        return redirect(next_page)
 
     return render_template("login.html", title="Login",form=form)

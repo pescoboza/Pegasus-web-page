@@ -14,17 +14,6 @@ def check_confirmed(func):
         return func(*args, **kwargs)
     return decorated_function
 
-# Checks that the user is logged in, else it redirects to login page
-def login_required(func):
-    @wraps(func)
-    def decorated_function(*args, **kwargs):
-        if session["logged_in"] == True:
-            return func(*args, **kwargs)
-        else:
-            flash("Please login to continue.")
-            return redirect(url_for("/login"))
-    return decorated_function
-
 # If the user is admin it proceeds, else it sends you to the homepage silently
 def admin_required(func):
     @wraps(func)

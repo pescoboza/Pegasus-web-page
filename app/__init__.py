@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.config.from_object("config.Config")
 
 login = LoginManager(app)
-
+login.login_view = "login"
 mail = Mail(app)
 
 db = SQLAlchemy(app)
@@ -28,11 +28,8 @@ from .views import *
 from .views.request_password_change import request_password_change
 from .views.logout import logout
 from .views.chatbot import chatbot
-db.create_all()
 
-if db.session.query(User).filter(User.username == "lolo23jhon").first() == None:
-    db.session.add(me)
-    db.session.commit()
+db.create_all()
 
 
 if __name__ == "__main__":
