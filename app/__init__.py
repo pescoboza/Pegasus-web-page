@@ -29,7 +29,6 @@ db.create_all()
 
 # TODO: Remove this mock admin account
 from datetime import datetime
-import sys
 me = User("Administrator","Developer","lolo23jhon@gmail.com", "lolo23jhon","lolo23jhon",datetime.now())
 me.admin = True
 me.confirmed = True

@@ -19,6 +19,7 @@ flask-mail = "*"
 tensorflow = "*"
 numpy = "*"
 nltk = "*"
+flask-login = "*"
 
 [requires]
 python_version = "3.7"

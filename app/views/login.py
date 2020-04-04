@@ -1,4 +1,4 @@
-from flask import render_template, request, flash, session
+from flask import render_template, request, flash, session, redirect, url_for
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
@@ -40,7 +40,7 @@ def login():
                         session["username"] = username
                     
                         # Login succesful
-                        return render_template("index.html", user=user)
+                        return redirect(url_for("index"))
                     else:
                         show_error_invalid_credentials = True
                 else:

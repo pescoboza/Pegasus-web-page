@@ -6,6 +6,8 @@
     <nav>
         <!-- TODO: Add check for user authentication in template -->
         <h1>PEGASUS</h1>
+        <!-- TODO: Add user dependent content. -->
+        {% if %}
     </nav>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
