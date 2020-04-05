@@ -24,5 +24,6 @@ def request_password_change():
             send_email("Password change request.", [user.email], text_body=text_body, html_body=html_body)
 
         flash("A password rest token has been sent to your email.")
+        return redirect(url_for("index"))
 
     return render_template("request_password_change.html", form=form)

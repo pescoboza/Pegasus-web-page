@@ -8,4 +8,4 @@ class LoginForm(FlaskForm):
     password = PasswordField(label="Password", validators=[InputRequired()])
     remember = BooleanField()
 
-    submit = SubmitField("Login@@@@@")
+    submit = SubmitField("Login")
