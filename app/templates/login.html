@@ -30,7 +30,7 @@
         {% endif %}
         <br>
 
-        <input type="submit" value="Login" class="loginbtn">
+        {{form.submit}}
         <br>
 
         <!-- TODO: Add redirection for forgot password -->
@@ -41,7 +41,7 @@
         <br>
 
         <!-- TODO: Add redirection for cancel login button -->
-        <button type="button" class="cancelbtn">Cancel</button>
+        <a href="/index"><button type="button" class="cancelbtn">Cancel</button></a>
     </div>
 </form>
 {% endblock %}

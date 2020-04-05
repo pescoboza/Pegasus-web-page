@@ -1,8 +1,14 @@
+from flask_login import UserMixin
 from passlib.hash import sha256_crypt
-from app import db
+from app import db, login
 from . import FIELD_LENGTHS as flen
 
-class User(db.Model):
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+class User(UserMixin,db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(flen["first_name"]["max"]))
@@ -27,3 +33,6 @@ class User(db.Model):
         self.confirmed = False
         self.confirmed_on = None
         self.newsletter = newsletter
+
+    def check_password(self, password):
+        return sha256_crypt.verify(password, self.password)

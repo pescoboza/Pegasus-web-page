@@ -1,56 +1,38 @@
-from flask import render_template, request, flash, session
+from werkzeug.urls import url_parse
+from flask import render_template, request, flash, redirect, url_for
+from flask_login import current_user, login_user
 from .. import app, db
 from ..models.user import User
 from ..forms.login_form import LoginForm
-from passlib.hash import sha256_crypt
-from time import sleep
+
 # ---------------------------------------------------
 # Login page
 # ---------------------------------------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
+    # Unauthenthicated users will be returned to the index page.
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    
     form = LoginForm()
-    message = None
 
     show_error_invalid_credentials = False
 
-
-    # Check for a POST request
-    if request.method == "POST": 
+    if form.validate_on_submit():
+        user = db.session.query(User).filter(User.username == form.username.data).first()
         
-        if form.validate_on_submit():
-            username = form.username.data
-            password = form.password.data
-            
-            # Query for the user with that username
-            user =  db.session.query(User).filter(User.username == username).first() 
-
-            # Check username
-            if user != None:
-            
-                # Check if account confirmed
-                if user.confirmed == True:
-                
-                    # Check if password correct
-                    if sha256_crypt.verify(password,user.password):
-                
-                        # TODO: Add logout option session.
-                        session["logged_in"] = True
-                        session["username"] = username
-                    
-                        # Login succesful
-                        return render_template("index.html", user=user)
-                    else:
-                        show_error_invalid_credentials = True
-                else:
-                    flash("Please confirm your account.")
-            else:
-                show_error_invalid_credentials = True
-        else:
-            show_error_invalid_credentials = True
-
-    if show_error_invalid_credentials:
-        flash("Invalid credentials. Please try again.")
+        if user == None or not user.check_password(form.password.data):
+            flash("Invalid login credentials.")
+            return redirect(url_for("login"))
         
-    return render_template("login.html", form=form)
+        login_user(user, remember=form.remember.data)
+        next_page = request.args.get("next")
+
+        # If the next page is not relative, return the user to index.
+        if not next_page or url_parse(next_page).netloc !=  ' ':
+            next_page = url_for("index")
+
+        return redirect(next_page)
+
+    return render_template("login.html", title="Login",form=form)

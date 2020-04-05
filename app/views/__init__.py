@@ -50,4 +50,3 @@ def index():
 @app.route("/user/<username>")
 def profile(username):
     return render_template("profile.html")
-
