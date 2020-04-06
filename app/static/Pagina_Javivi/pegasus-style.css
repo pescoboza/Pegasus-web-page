@@ -5,14 +5,14 @@ body, html{
 }
 
 .bk-img {
-  background-image: url(SAC-2018.png);
+  background-image: url(tech_background.jpg);
   height: 100%; 
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .contactos {
-    background-color: rgb(1, 1, 87);
+    background-color: rgb(0,51,160);
     color: white;
     text-decoration: none;
     padding-left: 50px;
@@ -31,8 +31,8 @@ body, html{
 }
 
 .navegacion .logo {
-    height: 50px;
-    width: 100px;
+    height: 80px;
+    width: 240px;
 }
 
 .navegacion .lista{
@@ -40,7 +40,7 @@ body, html{
     justify-content: space-around;
     background-color: white;
     font-size: 25px;
-    color:rgb(1, 1, 87);
+    color:rgb(0,51,160);
     text-decoration: none;
     list-style-type: none;
     position: fixed;
@@ -67,18 +67,18 @@ body, html{
 
 a:link {
     text-decoration: none;
-    color:rgb(1, 1, 87);
+    color:rgb(0,51,160);
 }
 
 a:visited {
-    color:rgb(1, 1, 87);
+    color:rgb(0,51,160);
 }
 
 a:active {
     color: goldenrod;;
 }
 
-.titulo-foro {
+.titulo-inicio {
     font-size: 100px;
     color: white;
     padding-top: 100px;
@@ -87,36 +87,27 @@ a:active {
     margin-block-end: 0em;
 }
 
-.subtitulo-foro {
-    font-size: 70px;
+.subtitulo-inicio {
+    font-size: 45px;
     color: white;
-    padding-left: 375px;
+    padding-left: 300px;
     padding-bottom: 50px;
     margin-block-start: 0em;
     margin-block-end: 0em;
 }
 
-.texto-inicio {
+.suscribete-inicio {
     font-size: 60px;
     color: white;
-    padding-left: 375px;
+    padding-left: 175px;
     margin-right: 650px;
     margin-top: 25px;
-    background-color: rgb(1, 1, 87);
+    background-color: rgb(0,51,160);
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
 
-.texto-contador {
-    font-size: 30px;
-    color: white;
-    padding-left: 425px;
-    padding-right: 0px;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-}
-
-.fecha-inicio {
+.actividades-inicio {
     font-size: 30px;
     color: white;
     margin-left: 925px;
@@ -124,7 +115,7 @@ a:active {
     padding-right: 0px;
     margin-block-start: 0em;
     margin-block-end: 0em;
-    background-color: rgb(1, 1, 87);
+    background-color: rgb(0,51,160);
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
@@ -139,7 +130,7 @@ a:active {
     font-size: 75px;
     padding-top: 35px;
     padding-left: 35px;
-    color:rgb(1, 1, 87);
+    color: rgb(0,51,160);
 
 }
 
