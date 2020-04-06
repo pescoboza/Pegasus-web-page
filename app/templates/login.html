@@ -36,12 +36,12 @@
         <!-- TODO: Add redirection for forgot password -->
         <label>
             {{form.remember}}Remember me
-            <br><span><a href="./forgot-password">Forgot password?</a></span>
+            <br><span><a href="{{url_for('request_password_change')}}">Forgot password?</a></span>
         </label>
         <br>
 
         <!-- TODO: Add redirection for cancel login button -->
-        <a href="/index"><button type="button" class="cancelbtn">Cancel</button></a>
+        <a href="{{url_for('index')}}"><button type="button" class="cancelbtn">Cancel</button></a>
     </div>
 </form>
 {% endblock %}
