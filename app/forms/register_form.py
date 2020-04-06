@@ -3,6 +3,7 @@ from wtforms import TextField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError,Required, Length, Email, EqualTo
 from .. import db
 from ..models import FIELD_LENGTHS as flen
+from ..models.user import User
 
 class RegisterForm(FlaskForm):
     first_name = TextField(label="First Name", validators=[
