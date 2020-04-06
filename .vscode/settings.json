@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "{$workspaceFolder}\\.virtualenvs\\Pegasus-web-page-5zlzYNLo\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\sam's club\\.virtualenvs\\Pegasus-web-page-5zlzYNLo\\Scripts\\python.exe",
     "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"],
 
     "[python]": {
