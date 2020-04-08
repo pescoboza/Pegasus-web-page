@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import Length
-from ..models import FIELD_LENGTHS as flen
+from ..validators import NEW_FIELDS as nf
 
 class EditProfileForm(FlaskForm): 
-    first_name = StringField("Real name"), validators=[Length(**flen["first_name"])])
-    last_name = StringField("Real name"), validators=[Length(**flen["last_name"])])
-    location = StringField("Location", validators=[Length(**flen["location"])])
+    first_name = nf["first_name"]
+    last_name = nf["last_name"]
+    location = nf["locatoin"]
+    about_me = nf["about_me"]
     
     submit = SubmitField("Submit")
