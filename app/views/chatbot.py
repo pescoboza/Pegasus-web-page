@@ -1,5 +1,5 @@
 from flask import request, render_template
-from .. import app
+from .. import app, session
 from ..forms.chat_form import ChatForm
 
 # TODO: Change the chatbot from Gilbert (mock testing bot) to Peggy (actual bot with neural network).
@@ -25,9 +25,10 @@ class ChatMessage():
         self.content = content
         self.from_you = from_you
 
+BOTNAME = "Gilbert"
 
 @app.route("/chatbot", methods=["GET", "POST"])
-def chatbot(username="You", botname="Gilbert", chat_messages=[]):
+def chatbot(username="You", botname=BOTNAME, chat_messages=[]):
     form = ChatForm()
     if request.method == "POST" and form.validate_on_submit:
 
