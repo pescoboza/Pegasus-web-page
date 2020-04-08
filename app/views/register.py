@@ -40,7 +40,7 @@ def register():
                 form.email.data,
                 form.username.data,
                 form.password.data,
-                datetime.now(),
+                datetime.utcnow(),
                 form.newsletter.data)
 
             # Add the new user to the database
