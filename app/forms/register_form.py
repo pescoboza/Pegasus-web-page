@@ -1,23 +1,23 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField, BooleanField, SubmitField
+from wtforms import TextField, PasswordField, Booleacreate_new_fieldield, SubmitField
 from wtforms.validators import ValidationError,Required, Length, Email, EqualTo
 from .. import db
-from ..validators import NEW_FIELDS as nf
+from ..validators import create_new_field
 from ..models.user import User
 
 class RegisterForm(FlaskForm):
-    first_name = nf["first_name"]
-    last_name = nf["last_name"]
-    username = nf["username"]
-    email = nf["email"]
-    password = nf["password"]
+    first_name = create_new_field["first_name"]
+    last_name = create_new_field["last_name"]
+    username = create_new_field["username"]
+    email = create_new_field["email"]
+    password = create_new_field["password"]
     repeat_password = PasswordField(label="Repeat password", validators=[
                                    Required(),  
                                    EqualTo("password", 
                                    message="Passwords must match.")])
 
-    newsletter = BooleanField()
-    accept_terms_and_conditions = BooleanField(validators=[Required()])
+    newsletter = Booleanfieldield()
+    accept_terms_and_conditions = Booleanfieldield(validators=[Required()])
 
     submit = SubmitField("Register")
 

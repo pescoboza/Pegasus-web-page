@@ -1,3 +1,4 @@
+from copy import deepcopy
 from wtforms import StringField, PasswordField
 from wtforms.validators import Email, Length, DataRequired, Regexp
 
@@ -67,3 +68,6 @@ NEW_FIELDS = {
     
     "about_me": StringField("About me", validators=[Length(**FIELD_LENGTHS["about_me"])])
 }
+
+def create_new_field(field_name):
+    return deepcopy(NEW_FIELDS[field_name])
