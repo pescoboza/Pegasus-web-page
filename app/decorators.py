@@ -1,6 +1,6 @@
-from threading import Thread
 from functools import wraps
 from flask import flash, redirect, url_for, session
+from flask_login import current_user
 from . import db
 from .models.user import User
 
@@ -18,7 +18,7 @@ def check_confirmed(func):
 def admin_required(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
-        user = User.query.filter_by(username=usename).first()
+        user = User.query.filter_by(username=current_user.username).first()
         if user != None and user.admin == True:
             return func(*args, **kwargs)
         else:
