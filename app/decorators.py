@@ -19,7 +19,7 @@ def admin_required(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         user = User.query.filter_by(username=current_user.username).first()
-        if user != None and user.admin == True:
+        if user != None and user.is_administrator == True:
             return func(*args, **kwargs)
         else:
             return redirect(url_for("index"))

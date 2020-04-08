@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String())
     registered_on = db.Column(db.DateTime)
-    admin = db.Column(db.Boolean, default=False)
+    is_administrator = db.Column(db.Boolean, default=False)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
     newsletter = db.Column(db.Boolean)

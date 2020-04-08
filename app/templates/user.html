@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <h1>{{user.username}}</h1>
+    <p>{{user.first_name}} {{user.last_name}}</p>
+    <p>{{user.location}}</p>
+
+    {% if current_user.is_administrator() %}
+    <p><a href="mailto:{{user.email}}">{{user.email}}</a></p>
+    {% endif %}
+
+    {% if user.about_me %}
+    <p>{{user.about_me}}</p>
+    {% endif %}
+
+    Member since {{user.registered_on}}.
+    Last seen {{ moment(user.last_seen).fromNow() }}.
+</div>
+
+
+{% if user == current_user() %}
+<a class="btn btn-default" href="{{urlfor('edit_profile')}}">Edit profile</a>
+{% endif %}
+
+{% endblock %}
