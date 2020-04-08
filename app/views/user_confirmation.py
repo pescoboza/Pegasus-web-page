@@ -18,7 +18,7 @@ def user_confirmation(token):
         return redirect(url_for("login"))
     else:
         user.confirmed = True
-        user.confirmed_on = datetime.now()
+        user.confirmed_on = datetime.utcnow()
         db.session.add(user)
         db.session.commit()
         flash("You succesfully confirmed your account. Thank you!","success")

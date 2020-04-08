@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from passlib.hash import sha256_crypt
 from app import db, login
 from . import FIELD_LENGTHS as flen
+from .post import Post
 
 
 @login.user_loader
@@ -22,6 +23,12 @@ class User(UserMixin,db.Model):
     confirmed_on = db.Column(db.DateTime)
     newsletter = db.Column(db.Boolean)
 
+    about_me = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    last_seen = db.Column(db.Datetime(), default=datetime.utcnow())
+
+    posts = db.relationship("Post", backref="author", lazy="dynamic")
+
 
     def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
         self.first_name = first_name
@@ -36,3 +43,8 @@ class User(UserMixin,db.Model):
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
+
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()
