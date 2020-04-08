@@ -1,7 +1,7 @@
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from passlib.hash import sha256_crypt
 from .. import app, db, login
-from ..role import Role
+from ..role import Role, Permission
 from . import FIELD_LENGTHS as flen
 from .post import Post
 
@@ -55,3 +55,16 @@ class User(UserMixin,db.Model):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
         db.session.commit()
+
+    def can(self, perm):
+        return self.role is not None and self.role.has_permission(perm)
+
+    def is_administrator(self):
+        return self.can(Permission.ADMIN)
+
+class AnonymousUser(AnonymouseUserMixin):
+    def can(self, perm):
+        return False
+
+    def is_administrator(self):
+        return False
