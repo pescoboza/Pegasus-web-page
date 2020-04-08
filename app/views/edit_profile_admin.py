@@ -17,7 +17,7 @@ def edit_profile_admin(id):
         user.username = form.username.data
         user.first_name = form.first_name.data
         user.last_name = form.last_name.data
-        user.confirmed = form.confirmed.data
+        user.is_authenticated = form.is_authenticated.data
         user.role = Role.query.get(form.role.data) # TODO: Add user roles
         user.location = form.location.data
         user.about_me = form.about_me.data
@@ -27,7 +27,7 @@ def edit_profile_admin(id):
 
         flash ("The profile has been updated.")
 
-        return redirect(url_for("/profile", username=user.username))
+        return redirect(url_for(".profile", username=user.username))
 
     form.email.data = user.email
     form.username.data = user.username
@@ -35,7 +35,7 @@ def edit_profile_admin(id):
     form.last_name.data = user.last_name
     form.location.data = user.location
     form.about_me.data = user.about_me
-    form.confirmed.data = user.confirmed
+    form.is_authenticated.data = user.is_authenticated
     form.role.data = user.role_id
 
     return render_template("edit_profile.html", form=form, user=user) # TODO: Write edit_profile.html and add check for if user is administrator

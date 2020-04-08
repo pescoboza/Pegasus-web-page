@@ -1,6 +1,8 @@
-from flask_login import UserMixin
-from passlib.hash import sha256_crypt
-from app import db, login
+from flask import request
+from flask_login import UserMixin, AnonymousUserMixin
+from passlib.hash import sha256_crypt, ldap_hex_mdf5
+from .. import app, db, login
+from ..role import Role, Permission
 from . import FIELD_LENGTHS as flen
 from .post import Post
 
@@ -18,28 +20,40 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
     password = db.Column(db.String())
     registered_on = db.Column(db.DateTime)
-    admin = db.Column(db.Boolean, default=False)
-    confirmed = db.Column(db.Boolean, default=False)
-    confirmed_on = db.Column(db.DateTime)
+    is_administrator = db.Column(db.Boolean, default=False)
+    is_authenticated = db.Column(db.Boolean, default=False)
+    authenticated_on = db.Column(db.DateTime)
     newsletter = db.Column(db.Boolean)
 
     about_me = db.Column(db.String(64))
     location = db.Column(db.String(64))
     last_seen = db.Column(db.Datetime(), default=datetime.utcnow())
 
+    avatar_hash = db.Column(db.String(32))
+
     posts = db.relationship("Post", backref="author", lazy="dynamic")
 
 
-    def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
+    def __init__(self, first_name, last_name, email, username, password, registered_on, role=1, newsletter=False):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = sha256_crypt.hash(password)
         self.registered_on = registered_on
-        self.confirmed = False
-        self.confirmed_on = None
+        self.is_authenticated = False
+        self.authenticated_on = None
+        self.role = role
         self.newsletter = newsletter
+        self.avatar_hash = None
+
+        if self.email == app.config["APP_ADMIN"]:
+            self.role = Role.query.filter_by(name="administrator").first()
+        if self.role == None:
+            self.role = Role.query.filter_by(default=True).first()
+
+        if self.email != none and self.avatar_hash == None:
+            self.avatar_hash = 
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
@@ -48,3 +62,24 @@ class User(UserMixin,db.Model):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
         db.session.commit()
+
+    def can(self, perm):
+        return self.role is not None and self.role.has_permission(perm)
+
+    def is_administrator(self):
+        return self.can(Permission.ADMIN)
+
+    def gravatar_hash(self):
+        return ldap_hex_mdf5.hash(self.email)[5:]
+
+    def gravatar(self, size=100, default="identicon", rating="g"):
+        url = "https://secure.gravatar.com/avatar" if request.is_secure() else "https://secure.gravatar.com/avatar"
+        hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
+        return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
+
+class AnonymousUser(AnonymouseUserMixin):
+    def can(self, perm):
+        return False
+
+    def is_administrator(self):
+        return False 

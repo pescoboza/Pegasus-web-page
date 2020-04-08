@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <img src="{{user.gravatar(size=256)}}" class="img-rounded profile-thumbnail">
+    <div class="profile-header">
+        <h1>{{user.username}}</h1>
+        <p>{{user.first_name}} {{user.last_name}}</p>
+        <p>{{user.location}}</p>
+
+        {% if current_user.is_administrator() %}
+        <p><a href="mailto:{{user.email}}">{{user.email}}</a></p>
+        {% endif %}
+
+        {% if user.about_me %}
+        <p>{{user.about_me}}</p>
+        {% endif %}
+
+        Member since {{user.registered_on}}.
+        Last seen {{ moment(user.last_seen).fromNow() }}.
+    </div>
+</div>
+
+
+{% if user == current_user %}
+<a class="btn btn-default" href="{{urlfor('edit_profile')}}">Edit profile</a>
+{% endif %}
+
+{% if current_user.is_administrator() %}
+<a class="btn btn-danger" href="{{url_for('edit_profile_admin', id=user.id)}}">Edit Profile [Admin]</a>
+{% endif %}
+
+{% endblock %}

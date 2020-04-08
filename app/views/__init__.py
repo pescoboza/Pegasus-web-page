@@ -41,12 +41,3 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
 @app.route("/home")
 def index():
     return render_template("index.html")
-
-
-
-# ---------------------------------------------------
-# Profile page
-# ---------------------------------------------------
-@app.route("/user/<username>")
-def profile(username):
-    return render_template("profile.html")
