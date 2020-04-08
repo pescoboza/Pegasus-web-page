@@ -10,7 +10,7 @@ class EditProfileAdminForm(FlaskForm):
     username = create_new_field("username")
     first_name = create_new_field("first_name")
     last_name = create_new_field("last_name")
-    confirmed = BooleanField("Confirmed")
+    is_authenticated = BooleanField("Authenticated")
     location = create_new_field("location")
     about_me = create_new_field("about_me")
 

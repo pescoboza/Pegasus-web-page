@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from passlib.hash import sha256_crypt
-from app import db, login
+from .. import app, db, login
+from ..role import Role
 from . import FIELD_LENGTHS as flen
 from .post import Post
 
@@ -19,8 +20,8 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String())
     registered_on = db.Column(db.DateTime)
     is_administrator = db.Column(db.Boolean, default=False)
-    confirmed = db.Column(db.Boolean, default=False)
-    confirmed_on = db.Column(db.DateTime)
+    is_authenticated = db.Column(db.Boolean, default=False)
+    authenticated_on = db.Column(db.DateTime)
     newsletter = db.Column(db.Boolean)
 
     about_me = db.Column(db.String(64))
@@ -30,16 +31,22 @@ class User(UserMixin,db.Model):
     posts = db.relationship("Post", backref="author", lazy="dynamic")
 
 
-    def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
+    def __init__(self, first_name, last_name, email, username, password, registered_on, role=1, newsletter=False):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.username = username
         self.password = sha256_crypt.hash(password)
         self.registered_on = registered_on
-        self.confirmed = False
-        self.confirmed_on = None
+        self.is_authenticated = False
+        self.authenticated_on = None
+        self.role = role
         self.newsletter = newsletter
+
+        if self.email == app.config["FLASKY_ADMIN"]:
+            self.role = Role.query.filter_by(name="administrator").first()
+        if self.role == None:
+            self.role = Role.query.filter_by(default=True).first()
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)

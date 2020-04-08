@@ -22,7 +22,7 @@ def edit_profile():
 
         flash("Your profile has been updated")
 
-        return redirect(url_for("profile", username=current_user.username))
+        return redirect(url_for(".profile", username=current_user.username))
 
     form.first_name.data = current_user.first_name
     form.last_name.data = current_user.last_name

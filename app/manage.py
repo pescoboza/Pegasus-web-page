@@ -7,7 +7,7 @@ from .models.user import User
 def create_admin(first_name, last_name,email, username ,password):
     admin_user = User(first_name, last_name,email, username, password, datetime.utcnow())
 
-    admin_user.confirmed = True
+    admin_user.is_authenticated = True
     admin_user.is_administrator = True
 
     db.session.add(admin_user)
