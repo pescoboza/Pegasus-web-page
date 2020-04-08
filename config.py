@@ -18,3 +18,4 @@ class Config:
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
 
     APP_ADMIN = "lolo23jhon@gmail.com"
+    APP_POSTS_PER_PAGE = 20
