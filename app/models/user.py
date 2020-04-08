@@ -23,6 +23,10 @@ class User(UserMixin,db.Model):
     confirmed_on = db.Column(db.DateTime)
     newsletter = db.Column(db.Boolean)
 
+    about_me = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    last_seen = db.Column(db.Datetime(), default=datetime.utcnow())
+
     posts = db.relationship("Post", backref="author", lazy="dynamic")
 
 
@@ -39,3 +43,8 @@ class User(UserMixin,db.Model):
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
+
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()

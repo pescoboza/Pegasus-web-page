@@ -27,4 +27,13 @@ FIELD_LENGTHS = {
         "max": 254,
         "message": None
     },
+    "location":{
+        "min":0,
+        "max":64
+    },
+    "about_me":{
+        "min":0,
+        "max":64
+    }
+    
 }
