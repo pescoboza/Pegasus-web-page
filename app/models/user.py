@@ -16,15 +16,15 @@ class Permission:
 
 ROLES = {
     "user": {
-        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE],
+        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES],
         "description": "Basic permissions to write articles and comments and to follow othre users. This is the deault for new users."
     },
     "moderator": {
-        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE, Permission.MODERATE],
+        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES, Permission.MODERATE],
         "description": "Adds permission to moderate comments made by other users."
     },
     "administrator":{
-        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE, Permission.MODERATE, Permission.ADMIN],
+        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES, Permission.MODERATE, Permission.ADMIN],
         "description": "Full access, which includes permission to change the role of other users."
     }
 }
