@@ -1,8 +1,8 @@
 from flask import request
 from flask_login import UserMixin, AnonymousUserMixin
-from passlib.hash import sha256_crypt, ldap_hex_mdf5
+from passlib.hash import sha256_crypt, ldap_hex_md5
 from .. import app, db, login
-from ..role import Role, Permission
+from ..models.roles import Role, Permission
 from . import FIELD_LENGTHS as flen
 from .post import Post
 
@@ -52,8 +52,8 @@ class User(UserMixin,db.Model):
         if self.role == None:
             self.role = Role.query.filter_by(default=True).first()
 
-        if self.email != none and self.avatar_hash == None:
-            self.avatar_hash = 
+        if self.email != None and self.avatar_hash == None:
+            self.avatar_hash = gravatar_hash()
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)

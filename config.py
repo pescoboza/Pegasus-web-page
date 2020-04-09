@@ -19,3 +19,5 @@ class Config:
 
     APP_ADMIN = "lolo23jhon@gmail.com"
     APP_POSTS_PER_PAGE = 20
+
+    UNIT_TESTING_MODE = True

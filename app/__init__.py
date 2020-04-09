@@ -28,9 +28,9 @@ from .views import *
 from .views.request_password_change import request_password_change
 from .views.logout import logout
 from .views.chatbot import chatbot
+    
 
 db.create_all()
-
 
 if __name__ == "__main__":
     app.run()
