@@ -143,7 +143,7 @@ class User(UserMixin,db.Model):
         hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
         return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
 
-class AnonymousUser(AnonymouseUserMixin):
+class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):
         return False
 
