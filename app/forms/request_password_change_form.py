@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import ValidationError, TextField, SubmitField
 from wtforms.validators import Required, Length, Email, EqualTo
 from .. import db
-from ..models import FIELD_LENGTHS as flen
+from ..validators import FIELD_LENGTHS as flen
 from ..models.user import User
 
 class RequestPasswordChangeForm(FlaskForm):
