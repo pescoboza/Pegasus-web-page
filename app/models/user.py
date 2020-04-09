@@ -2,7 +2,7 @@ from flask import request
 from flask_login import UserMixin, AnonymousUserMixin
 from passlib.hash import sha256_crypt, ldap_hex_md5
 from .. import app, db, login
-from . import FIELD_LENGTHS as flen
+from ..validators import FIELD_LENGTHS as flen
 from .post import Post
 
 

@@ -46,7 +46,7 @@ FIELD_LENGTHS = {
 
 NEW_FIELDS = {
     "username": StringField(label="Username",
-                            validators=[InputRequired(),
+                            validators=[DataRequired(),
                                         Length(**FIELD_LENGTHS["username"]),
                                         Regexp("^[A-Za-z][A-Za-Z0-9_.]*$", 0,
                                                "Usernames must only contain letters, numbers, dots ('.') or underscores ('_').")]),
