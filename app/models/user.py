@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import request
 from flask_login import UserMixin, AnonymousUserMixin
 from passlib.hash import sha256_crypt, ldap_hex_md5
@@ -92,7 +93,7 @@ class User(UserMixin,db.Model):
 
     about_me = db.Column(db.String(64))
     location = db.Column(db.String(64))
-    last_seen = db.Column(db.Datetime(), default=datetime.utcnow())
+    last_seen = db.Column(db.DateTime(), default=datetime.utcnow())
 
     avatar_hash = db.Column(db.String(32))
 
