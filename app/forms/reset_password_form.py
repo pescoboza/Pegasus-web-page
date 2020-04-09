@@ -1,16 +1,16 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
-from wtforms.validators import Required, Length, EqualTo
-from ..models import FIELD_LENGTHS as flen
+from wtforms.validators import DataRequired, Length, EqualTo
+from ..validators import FIELD_LENGTHS as flen
 
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField(label="New password", validators=[
-                                   Required(), 
+                                   DataRequired(), 
                                    Length(**flen["password"])])
     
     repeat_password = PasswordField(label="Repeat password", validators=[
-                                   Required(),  
+                                   DataRequired(),  
                                    EqualTo("password", 
                                    message="Passwords must match.")])
 
