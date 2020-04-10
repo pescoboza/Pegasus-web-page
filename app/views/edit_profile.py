@@ -1,9 +1,8 @@
 from flask import flash, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from .. import app
-from ..user import User
+from .user import User
 from ..forms.edit_profile_form import EditProfileForm
-import ..profile 
 
 @app.route("/edit-profile", methods=["GET","POST"])
 @login_required
@@ -22,7 +21,7 @@ def edit_profile():
 
         flash("Your profile has been updated")
 
-        return redirect(url_for(".profile", username=current_user.username))
+        return redirect(url_for(".user", username=current_user.username))
 
     form.first_name.data = current_user.first_name
     form.last_name.data = current_user.last_name

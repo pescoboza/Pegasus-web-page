@@ -29,5 +29,5 @@ def permission_required(permission):
 def admin_required(func):
     return permission_required(Permission.ADMIN)(func)
 
-def moderator_required(func)
+def moderator_required(func):
     return permission_required(Permission.MODERATE)(func)

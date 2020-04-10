@@ -26,8 +26,13 @@ db = SQLAlchemy(app)
 from .models.user import User
 from .views import *
 from .views.request_password_change import request_password_change
+from .views.login import login
 from .views.logout import logout
 from .views.chatbot import chatbot
+from .views.blog import blog
+from .views.edit_profile import edit_profile
+from .views.edit_profile_admin import edit_profile_admin
+from .views.register import register
     
 
 db.create_all()

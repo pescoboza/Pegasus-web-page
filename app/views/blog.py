@@ -2,7 +2,7 @@ from flask import request, render_template, flash, redirect, url_for, current_ap
 from flask_login import current_user
 from .. import app
 from ..forms.post_form import PostForm
-from ..models.roles import Permission
+from ..models.user import Permission
 from ..models.post import Post
 
 @app.route("/blog", methods=["GET", "POST"])
