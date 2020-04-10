@@ -37,14 +37,14 @@ from .views.register import register
     
 
 def create_tables():
-    args = (bind=db.session.bind, checkfirst=True)
+    args = {"bind": db.session.bind, "checkfirst": True}
 
-    Role.__table__.create(*args)
+    Role.__table__.create(**args)
     Role.insert_roles()
     
-    User.__table__.create(*args)
+    User.__table__.create(**args)
 
-    Post.__table__.create(*args)
+    Post.__table__.create(**args)
 
 create_tables()
 
