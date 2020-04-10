@@ -2,8 +2,7 @@ from functools import wraps
 from flask import flash, redirect, url_for, session
 from flask_login import current_user
 from . import db
-from .models.user import User
-from .models.roles import Permission
+from .models.user import User, Permission
 
 def check_is_authenticated(func):
     @wraps(func)
@@ -16,7 +15,7 @@ def check_is_authenticated(func):
     return decorated_function
 
 def permission_required(permission):
-    def decortor(f):
+    def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not current_user.can(permission):
