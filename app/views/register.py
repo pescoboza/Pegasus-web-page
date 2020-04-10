@@ -25,7 +25,7 @@ def register():
             username=form.username.data,
             password=form.password.data,
             registered_on=datetime.utcnow(),
-            newsletter=form.newsletter.data)
+            newsletter=bool(form.newsletter.data))
 
         db.session.add(new_user)
         db.session.commit()

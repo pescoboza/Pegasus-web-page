@@ -105,26 +105,6 @@ class User(UserMixin,db.Model):
     posts = db.relationship("Post", backref="author", lazy="dynamic")
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
-    def __init__(self, first_name, last_name, email, username, password, registered_on, role=1, newsletter=False):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.username = username
-        self.password = sha256_crypt.hash(password)
-        self.registered_on = registered_on
-        self.is_authenticated = False
-        self.authenticated_on = None
-        self.role = role
-        self.newsletter = newsletter
-        self.avatar_hash = None
-
-        if self.email == app.config["APP_ADMIN"]:
-            self.role = Role.query.filter_by(name="administrator").first()
-        if self.role == None:
-            self.role = Role.query.filter_by(default=True).first()
-
-        if self.email != None and self.avatar_hash == None:
-            self.avatar_hash = gravatar_hash()
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
@@ -141,12 +121,33 @@ class User(UserMixin,db.Model):
         return self.can(Permission.ADMIN)
 
     def gravatar_hash(self):
-        return ldap_hex_mdf5.hash(self.email)[5:]
+        return ldap_hex_md5.hash(self.email)[5:]
 
     def gravatar(self, size=100, default="identicon", rating="g"):
         url = "https://secure.gravatar.com/avatar" if request.is_secure() else "https://secure.gravatar.com/avatar"
         hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
         return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
+
+    
+    def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.username = username
+        self.password = sha256_crypt.hash(password)
+        self.registered_on = registered_on
+        self.is_authenticated = False
+        self.authenticated_on = None
+        self.newsletter = newsletter
+        self.avatar_hash = None
+
+        if self.email == app.config["APP_ADMIN"]:
+            self.role = Role.query.filter_by(name="administrator").first()
+        if self.role == None:
+            self.role = Role.query.filter_by(default=True).first()
+
+        if self.email != None and self.avatar_hash == None:
+            self.avatar_hash = self.gravatar_hash()
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):
