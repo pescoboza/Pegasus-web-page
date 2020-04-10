@@ -41,10 +41,10 @@ class Role(db.Model):
 
     def __init__(self, **kwargs):
         super(Role, self).__init__(**kwargs)
-        if self.permission is None:
+        if self.permissions is None:
             self.permission = 0
 
-    def has_persmission(self, perm):
+    def has_permission(self, perm):
         return self.permissions & perm == perm
 
     def add_persmission(self, perm):
@@ -66,7 +66,7 @@ class Role(db.Model):
             if role is None:
                 role = Role(name=r)
             role.reset_permissions()
-            for perm in roles[r]["permissions"]:
+            for perm in ROLES[r]["permissions"]:
                 role.add_persmission(perm)
             role.default = (role.name == default_role)
             db.session.add(role)
