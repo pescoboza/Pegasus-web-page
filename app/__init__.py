@@ -24,6 +24,7 @@ db = SQLAlchemy(app)
 # Main function
 # ---------------------------------------------------
 from .models.user import User, Role
+from .models.post import Post
 from .views import *
 from .views.request_password_change import request_password_change
 from .views.login import login
@@ -35,8 +36,15 @@ from .views.edit_profile_admin import edit_profile_admin
 from .views.register import register
     
 
-db.create_all()
-Role.insert_roles()
+def create_tables():
+    args = (bind=db.session.bind, checkfirst=True)
+
+    Role.__table__.create(*args)
+    Role.insert_roles()
+    
+    User.__table__.create(*args)
+
+    Post.__table__.create(*args)
 
 if __name__ == "__main__":
     app.run()
