@@ -6,59 +6,41 @@ from ..forms.register_form import RegisterForm
 from ..token import generate_confirmation_token
 from .user_confirmation import user_confirmation
 from ..send_email import send_email
-import sys
 
 # ---------------------------------------------------
 # Sign up page
 # ---------------------------------------------------
 @app.route("/register", methods=["GET", "POST"])
-@app.route("/sign-up", methods=["GET", "POST"])
 def register():
 
     form = RegisterForm()
 
     # TODO: Add validation for matching password with repeated password
-    if request.method == "POST" and form.validate_on_submit():
-        validation_error = False
+    if form.validate_on_submit():
 
-        # Check if email is available
-        if db.session.query(User).filter(User.email == form.email.data).first() != None:
-            form.email.errors.append("That email address is already registered.")
-            validation_error = True
+        new_user = User(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email.data,
+            username=form.username.data,
+            password=form.password.data,
+            registered_on=datetime.utcnow(),
+            newsletter=bool(form.newsletter.data))
 
-        # Check if username is available
-        if db.session.query(User).filter(User.username == form.username.data).first() != None:
-            form.username.errors.append("That username is already taken.")
-            validation_error = True
+        db.session.add(new_user)
+        db.session.commit()
 
-        # Database validation failed, return the form with respective errors
-        if not validation_error:
-            # Createa a new user object
-            new_user = User(
-                form.first_name.data,
-                form.last_name.data,
-                form.email.data,
-                form.username.data,
-                form.password.data,
-                datetime.utcnow(),
-                form.newsletter.data)
+        # Generation of confirmation email
+        token = generate_confirmation_token(new_user.email)
+        confirm_url = url_for("user_confirmation", token=token, _external=True)
+        html = render_template("user_confirmation.html",
+                               confirm_url=confirm_url)
 
-            # Add the new user to the database
-            db.session.add(new_user)
-            db.session.commit()
+        subject = "Pegasus: please confirm your email!"
+        status = send_email(subject=subject, recipients=[
+                            new_user.email], html_body=html)
 
-            # Generation of confirmation email
-            token = generate_confirmation_token(new_user.email)
-            confirm_url = url_for("user_confirmation",token=token, _external=True)
-            html = render_template("user_confirmation.html", 
-                                confirm_url=confirm_url)
-            subject = "Pegasus: please confirm your email!"
-            status = send_email(subject=subject, recipients=[new_user.email], html_body=html)
-            
-            flash("A confirmation email has been sent to your email.","success")
-            return redirect(url_for("index"))
+        flash("A confirmation email has been sent to your email.", "success")
+        return redirect(url_for("index"))
 
     return render_template("register.html", form=form)
-
-# TODO: Figure out how to send confiration emails. 
-# TODO: Figure out how to correctly display flashes.

@@ -41,10 +41,10 @@ class Role(db.Model):
 
     def __init__(self, **kwargs):
         super(Role, self).__init__(**kwargs)
-        if self.permission is None:
+        if self.permissions is None:
             self.permission = 0
 
-    def has_persmission(self, perm):
+    def has_permission(self, perm):
         return self.permissions & perm == perm
 
     def add_persmission(self, perm):
@@ -61,12 +61,12 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         default_role = "user"
-        for r in ROLE:
+        for r in ROLES:
             role = Role.query.filter_by(name=r).first()
             if role is None:
                 role = Role(name=r)
             role.reset_permissions()
-            for perm in roles[r]["permissions"]:
+            for perm in ROLES[r]["permissions"]:
                 role.add_persmission(perm)
             role.default = (role.name == default_role)
             db.session.add(role)
@@ -80,46 +80,31 @@ def load_user(id):
 class User(UserMixin,db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
+    
     first_name = db.Column(db.String(flen["first_name"]["max"]))
     last_name = db.Column(db.String(flen["last_name"]["max"]))
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
-    password = db.Column(db.String())
-    registered_on = db.Column(db.DateTime)
-    is_administrator = db.Column(db.Boolean, default=False)
-    is_authenticated = db.Column(db.Boolean, default=False)
-    authenticated_on = db.Column(db.DateTime)
-    newsletter = db.Column(db.Boolean)
-
     about_me = db.Column(db.String(64))
     location = db.Column(db.String(64))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow())
 
+    password = db.Column(db.String())
+
+    newsletter = db.Column(db.Boolean, default=False)
+
+    is_authenticated = db.Column(db.Boolean, default=False)
+    authenticated_on = db.Column(db.DateTime)
+    registered_on = db.Column(db.DateTime)
+    
+    is_administrator = db.Column(db.Boolean, default=False)
+
+
     avatar_hash = db.Column(db.String(32))
 
     posts = db.relationship("Post", backref="author", lazy="dynamic")
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
-
-    def __init__(self, first_name, last_name, email, username, password, registered_on, role=1, newsletter=False):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.username = username
-        self.password = sha256_crypt.hash(password)
-        self.registered_on = registered_on
-        self.is_authenticated = False
-        self.authenticated_on = None
-        self.role = role
-        self.newsletter = newsletter
-        self.avatar_hash = None
-
-        if self.email == app.config["APP_ADMIN"]:
-            self.role = Role.query.filter_by(name="administrator").first()
-        if self.role == None:
-            self.role = Role.query.filter_by(default=True).first()
-
-        if self.email != None and self.avatar_hash == None:
-            self.avatar_hash = gravatar_hash()
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
@@ -136,12 +121,34 @@ class User(UserMixin,db.Model):
         return self.can(Permission.ADMIN)
 
     def gravatar_hash(self):
-        return ldap_hex_mdf5.hash(self.email)[5:]
+        return ldap_hex_md5.hash(self.email)[5:]
 
     def gravatar(self, size=100, default="identicon", rating="g"):
         url = "https://secure.gravatar.com/avatar" if request.is_secure() else "https://secure.gravatar.com/avatar"
         hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
         return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
+
+    
+    def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.username = username
+        self.password = sha256_crypt.hash(password)
+        self.registered_on = registered_on
+        self.is_authenticated = False
+        self.authenticated_on = None
+        self.newsletter = newsletter
+        self.avatar_hash = None
+        self.role = None
+
+        if self.email == app.config["APP_ADMIN"]:
+            self.role = Role.query.filter_by(name="administrator").first()
+        if self.role == None:
+            self.role = Role.query.filter_by(default=True).first()
+
+        if self.email != None and self.avatar_hash == None:
+            self.avatar_hash = self.gravatar_hash()
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):

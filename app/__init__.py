@@ -23,14 +23,37 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
-from .models.user import User
+from .models.user import User, Role
+from .models.post import Post
 from .views import *
 from .views.request_password_change import request_password_change
+from .views.login import login
 from .views.logout import logout
 from .views.chatbot import chatbot
+from .views.blog import blog
+from .views.edit_profile import edit_profile
+from .views.edit_profile_admin import edit_profile_admin
+from .views.register import register
     
 
-db.create_all()
+def create_tables():
+    args = (bind=db.session.bind, checkfirst=True)
+
+    Role.__table__.create(*args)
+    Role.insert_roles()
+    
+    User.__table__.create(*args)
+
+    Post.__table__.create(*args)
+
+create_tables()
 
 if __name__ == "__main__":
     app.run()
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+#        TODO: GET THE BLOG WORKING           #
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+# - Figure out the creation order of data tables.
+#       - Solve role being of type None in User objects.
+#       - This automatically redirects logged in users to the index.

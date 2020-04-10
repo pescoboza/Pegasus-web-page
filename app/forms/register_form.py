@@ -21,12 +21,10 @@ class RegisterForm(FlaskForm):
 
     submit = SubmitField("Register")
 
-    def validate_username(self, username):
-        user = db.session.query(User).filter(User.username == username.data).first()
-        if user != None:
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first() != None:
             raise ValidationError("Please choose a different username.")
 
-    def validate_email(self, email):
-        user = db.session.query(User).filter(User.email == email.data).first()
-        if user != None:
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first() != None:
             raise ValidationError("Please use a different email address.")

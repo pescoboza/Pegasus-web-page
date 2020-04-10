@@ -9,20 +9,6 @@ from .user_confirmation import *
 from .register import *
 
 
-# ---------------------------------------------------
-# Helpers
-# ---------------------------------------------------
-class Button:
-    # To be used with:
-    """
-    <form action="{{button.action}}">
-        <input type="submit" value="{{button.value}}">
-    </form>
-    """
-    def __init__(self, value, action):
-        self.link = link
-        self.text = text
-
 def cover_email(email,num_visible_chars=1, replacement_char='*'):
     at = email.find('@')
     uname = email[:at]
