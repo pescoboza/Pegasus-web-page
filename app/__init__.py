@@ -46,5 +46,14 @@ def create_tables():
 
     Post.__table__.create(*args)
 
+create_tables()
+
 if __name__ == "__main__":
     app.run()
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+#        TODO: GET THE BLOG WORKING           #
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
+# - Figure out the creation order of data tables.
+#       - Solve role being of type None in User objects.
+#       - This automatically redirects logged in users to the index.
