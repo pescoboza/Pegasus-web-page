@@ -80,25 +80,30 @@ def load_user(id):
 class User(UserMixin,db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
+    
     first_name = db.Column(db.String(flen["first_name"]["max"]))
     last_name = db.Column(db.String(flen["last_name"]["max"]))
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
     username = db.Column(db.String(flen["username"]["max"]), unique=True)
-    password = db.Column(db.String())
-    registered_on = db.Column(db.DateTime)
-    is_administrator = db.Column(db.Boolean, default=False)
-    is_authenticated = db.Column(db.Boolean, default=False)
-    authenticated_on = db.Column(db.DateTime)
-    newsletter = db.Column(db.Boolean)
-
     about_me = db.Column(db.String(64))
     location = db.Column(db.String(64))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow())
 
+    password = db.Column(db.String())
+
+    newsletter = db.Column(db.Boolean, default=False)
+
+    is_authenticated = db.Column(db.Boolean, default=False)
+    authenticated_on = db.Column(db.DateTime)
+    registered_on = db.Column(db.DateTime)
+    
+    is_administrator = db.Column(db.Boolean, default=False)
+
+
     avatar_hash = db.Column(db.String(32))
 
     posts = db.relationship("Post", backref="author", lazy="dynamic")
-
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
     def __init__(self, first_name, last_name, email, username, password, registered_on, role=1, newsletter=False):
         self.first_name = first_name
