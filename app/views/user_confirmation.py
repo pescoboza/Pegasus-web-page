@@ -21,5 +21,5 @@ def user_confirmation(token):
         user.authenticated_on = datetime.utcnow()
         db.session.add(user)
         db.session.commit()
-        flash("You succesfully is_authenticated your account. Thank you!","success")
+        flash("You succesfully authenticated your account. Thank you!","success")
     return redirect(url_for("index"))

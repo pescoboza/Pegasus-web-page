@@ -23,7 +23,7 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
-from .models.user import User
+from .models.user import User, Role
 from .views import *
 from .views.request_password_change import request_password_change
 from .views.login import login
@@ -36,6 +36,7 @@ from .views.register import register
     
 
 db.create_all()
+Role.insert_roles()
 
 if __name__ == "__main__":
     app.run()

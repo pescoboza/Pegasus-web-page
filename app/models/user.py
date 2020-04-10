@@ -61,7 +61,7 @@ class Role(db.Model):
     @staticmethod
     def insert_roles():
         default_role = "user"
-        for r in ROLE:
+        for r in ROLES:
             role = Role.query.filter_by(name=r).first()
             if role is None:
                 role = Role(name=r)
@@ -140,6 +140,7 @@ class User(UserMixin,db.Model):
         self.authenticated_on = None
         self.newsletter = newsletter
         self.avatar_hash = None
+        self.role = None
 
         if self.email == app.config["APP_ADMIN"]:
             self.role = Role.query.filter_by(name="administrator").first()
