@@ -124,7 +124,7 @@ class User(UserMixin,db.Model):
         return ldap_hex_md5.hash(self.email)[5:]
 
     def gravatar(self, size=100, default="identicon", rating="g"):
-        url = "https://secure.gravatar.com/avatar" if request.is_secure() else "https://secure.gravatar.com/avatar"
+        url = "https://secure.gravatar.com/avatar" if request.is_secure else "https://secure.gravatar.com/avatar"
         hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
         return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
 
