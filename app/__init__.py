@@ -37,6 +37,7 @@ from .views.edit_profile import edit_profile
 from .views.edit_profile_admin import edit_profile_admin
 from .views.register import register
 from .views.post import post
+from .views.edit import edit
     
 
 app.jinja_env.globals.update(Permission=Permission)
