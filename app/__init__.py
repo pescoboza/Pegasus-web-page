@@ -23,7 +23,7 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
-from .models.user import User, Role
+from .models.user import User, Role, Permission
 from .models.post import Post
 from .views import *
 from .views.request_password_change import request_password_change

@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
+{% block content %}
 <div>
     {% if current_user.can(Permission.WRITE_ARTICLES) %}
-    {{form.csrf_token}}
-    <!-- TODO: Finish post form -->
+    <form action="" method="POST">
+        {{form.csrf_token}}
+        {{form.body}}
+        {{form.submit}}
+    </form>
     {% endif %}
 </div>
 <ul class="posts">
@@ -27,3 +31,5 @@
 <div class="pagination">
     {{macros.pagination_widget(pagination, "blog")}}
 </div>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from flask import request, render_template, flash, redirect, url_for, current_app
 from flask_login import current_user
-from .. import app
+from .. import app, db
 from ..forms.post_form import PostForm
 from ..models.user import Permission
 from ..models.post import Post
@@ -28,5 +28,5 @@ def blog():
         page, per_page=current_app.config["APP_POSTS_PER_PAGE"],
         error_out=False)
     posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template("blog.html", form=form, posts=posts)
+    return render_template("blog.html", form=form, posts=posts, Permission=Permission, pagination=pagination)
     
