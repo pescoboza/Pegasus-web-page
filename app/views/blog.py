@@ -28,5 +28,5 @@ def blog():
         page, per_page=current_app.config["APP_POSTS_PER_PAGE"],
         error_out=False)
     posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template("blog.html", form=form, posts=posts, Permission=Permission, pagination=pagination)
+    return render_template("blog.html", form=form, posts=posts, pagination=pagination)
     
