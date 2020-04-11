@@ -23,7 +23,7 @@
 
 
 {% if user == current_user %}
-<a class="btn btn-default" href="{{urlfor('edit_profile')}}">Edit profile</a>
+<a class="btn btn-default" href="{{url_for('edit_profile')}}">Edit profile</a>
 {% endif %}
 
 {% if current_user.is_administrator() %}
