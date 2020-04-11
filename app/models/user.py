@@ -5,15 +5,17 @@ from passlib.hash import sha256_crypt, ldap_hex_md5
 from .. import app, db, login
 from ..validators import FIELD_LENGTHS as flen
 from .post import Post
+from .follow import Follow
 
 
 class Permission:
-    FOLLOW = 1 
+    FOLLOW = 1
     COMMENT = 2
     WRITE = 4
     WRITE_ARTICLES = 8
     MODERATE = 16
     ADMIN = 32
+
 
 ROLES = {
     "user": {
@@ -24,7 +26,7 @@ ROLES = {
         "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES, Permission.MODERATE],
         "description": "Adds permission to moderate comments made by other users."
     },
-    "administrator":{
+    "administrator": {
         "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES, Permission.MODERATE, Permission.ADMIN],
         "description": "Full access, which includes permission to change the role of other users."
     }
@@ -34,7 +36,7 @@ ROLES = {
 class Role(db.Model):
     __tablename__ = "roles"
     id = db.Column(db.Integer, primary_key=True)
-    name =  db.Column(db.String(64), unique=True)
+    name = db.Column(db.String(64), unique=True)
     default = db.Column(db.Boolean, default=False, index=True)
     permissions = db.Column(db.Integer)
     users = db.relationship("User", backref="role", lazy="dynamic")
@@ -54,7 +56,7 @@ class Role(db.Model):
     def remove_permission(self, perm):
         if self.has_persmission(perm):
             self.permissions -= perm
-    
+
     def reset_permissions(self):
         self.permissions = 0
 
@@ -77,10 +79,11 @@ class Role(db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
-class User(UserMixin,db.Model):
+
+class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    
+
     first_name = db.Column(db.String(flen["first_name"]["max"]))
     last_name = db.Column(db.String(flen["last_name"]["max"]))
     email = db.Column(db.String(flen["email"]["max"]), unique=True)
@@ -96,15 +99,39 @@ class User(UserMixin,db.Model):
     is_authenticated = db.Column(db.Boolean, default=False)
     authenticated_on = db.Column(db.DateTime)
     registered_on = db.Column(db.DateTime)
-    
-    is_administrator = db.Column(db.Boolean, default=False)
 
+    is_administrator = db.Column(db.Boolean, default=False)
 
     avatar_hash = db.Column(db.String(32))
 
     posts = db.relationship("Post", backref="author", lazy="dynamic")
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
+    followed = db.relationship("Follow", foreign_keys=[Follow.follower_id], backref=db.backref("follower", lazy="joined"),
+                               lazy="dynamic", cascade="all, delete-orphan")
+
+    followers = db.relationship("Follow", foreign_keys=[Follow.followed_id], backref=db.backref("followed", lazy="joined"),
+                                lazy="dynamic", cascade="all, delete-orphan")
+
+    def follow(self, user):
+        if not self.is_following(user):
+            f = Follow(follower=self, followed=user)
+            db.session.add(f)
+
+    def unfollow(self, user):
+        f = self.followed.filter_by(followed_id=user.id).first()
+        if f:
+            db.session.delete(f)
+        
+    def is_following(self, user):
+        if user.id == None:
+            return False
+        return self.followed.filter_by(followed_id=user.id).first() != None
+
+    def is_followed_by(self, user):
+        if user.id == None:
+            return False
+        return self.followers.filter_by(follower_id=user.id) != None
 
     def check_password(self, password):
         return sha256_crypt.verify(password, self.password)
@@ -128,7 +155,6 @@ class User(UserMixin,db.Model):
         hash = self.avatar_hash if self.avatar_hash != None else self.gravatar_hash()
         return "{url}/{hash}?s={size}&d={default}&r={rating}".format(url=url, hash=hash, size=size, default=default, rating=rating)
 
-    
     def __init__(self, first_name, last_name, email, username, password, registered_on, newsletter=False):
         self.first_name = first_name
         self.last_name = last_name
@@ -150,9 +176,10 @@ class User(UserMixin,db.Model):
         if self.email != None and self.avatar_hash == None:
             self.avatar_hash = self.gravatar_hash()
 
+
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):
         return False
 
     def is_administrator(self):
-        return False 
+        return False
