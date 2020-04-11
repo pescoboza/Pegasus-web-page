@@ -9,4 +9,4 @@ def user(username):
     if user == None:
         abort(404)
     posts = user.posts.order_by(Post.timestamp.desc()).all()
-    return render_template("user.html", user=user)
+    return render_template("user.html", user=user, posts=posts)
