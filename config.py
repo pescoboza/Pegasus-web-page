@@ -16,3 +16,8 @@ class Config:
     MAIL_USERNAME = "pegasus.csn@gmail.com"
     MAIL_DEFAULT_SENDER = "pegasus.csn@gmail.com"
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
+
+    APP_ADMIN = "lolo23jhon@gmail.com"
+    APP_POSTS_PER_PAGE = 20
+
+    UNIT_TESTING_MODE = True
