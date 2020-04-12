@@ -23,17 +23,17 @@
 
 {% if current_user.can(Permission.FOLLOW) and user != current_user %}
 {% if not current_user.is_following(user) %}
-<a href="{{url_for('.follow', username=user.username)}}" class="btn btn-primary"></a>
+<a href="{{url_for('follow', username=user.username)}}" class="btn btn-primary"></a>
 {% else %}
-<a href="{{urlf_for('.unfollow', username=user.username)}}" class="btn btn-default"></a>
+<a href="{{urlf_for('unfollow', username=user.username)}}" class="btn btn-default"></a>
 {% endif %}
 {% endif %}
 
-<a href="{{url_for('.followers', username=user.username)}}">
+<a href="{{url_for('followers', username=user.username)}}">
     Followers: <span class="badge">{{user.followers.count()}}</span>
 </a>
 
-<a href="{{url_for('.followed_by', username=user.username)}}">
+<a href="{{url_for('followed_by', username=user.username)}}">
     Following: <span class="badge">{{user.followed.count()}}</span>
 </a>
 

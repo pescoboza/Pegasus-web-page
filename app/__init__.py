@@ -27,6 +27,7 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 from .models.user import User, Role, Permission
 from .models.post import Post
+from .models.follow import Follow
 from .views import *
 from .views.request_password_change import request_password_change
 from .views.login import login
@@ -38,7 +39,9 @@ from .views.edit_profile_admin import edit_profile_admin
 from .views.register import register
 from .views.post import post
 from .views.edit import edit
-    
+from .views.follow import follow
+from .views.followers import followers
+from .views.followed_by import followed_by   
 
 app.jinja_env.globals.update(Permission=Permission)
 
@@ -51,6 +54,8 @@ def create_tables():
     User.__table__.create(**args)
 
     Post.__table__.create(**args)
+
+    Follow.__table__.create(**args)
 
 create_tables()
 
