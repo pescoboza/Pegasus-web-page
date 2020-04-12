@@ -19,6 +19,9 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
     
     return  uncovered_part + (len(uname)-num_visible_chars)*replacement_char + not_uname
         
+# 30 days
+COOKIE_DURATION = 30 * 24 * 60**2
+
 # ---------------------------------------------------
 # Index page
 # ---------------------------------------------------
