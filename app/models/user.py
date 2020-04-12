@@ -1,12 +1,11 @@
 from datetime import datetime
 from flask import request
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin, AnonymousUserMixin, login_manager
 from passlib.hash import sha256_crypt, ldap_hex_md5
 from .. import app, db, login
 from ..validators import FIELD_LENGTHS as flen
 from .post import Post
 from .follow import Follow
-
 
 class Permission:
     FOLLOW = 1
@@ -192,10 +191,11 @@ class User(UserMixin, db.Model):
 
         self.follow(self)
 
-
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):
         return False
 
     def is_administrator(self):
         return False
+
+login.anonymous_user = AnonymousUser

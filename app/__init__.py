@@ -3,7 +3,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_manager
+from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
 # TODO: Remove this import from final version and add heroku hostname.
@@ -17,6 +17,7 @@ app.config.from_object("config.Config")
 
 login = LoginManager(app)
 login.login_view = "login"
+
 mail = Mail(app)
 moment = Moment(app)
 
@@ -45,7 +46,6 @@ from .views.followers import followers
 from .views.followed_by import followed_by   
 
 app.jinja_env.globals.update(Permission=Permission)
-login_manager.anonymous_user = AnonymousUser
 
 def create_tables():
     args = {"bind": db.session.bind, "checkfirst": True}
