@@ -28,6 +28,7 @@ db = SQLAlchemy(app)
 from .models.user import User, Role, Permission
 from .models.post import Post
 from .models.follow import Follow
+from .models.comment import Comment
 from .views import *
 from .views.request_password_change import request_password_change
 from .views.login import login
@@ -56,6 +57,9 @@ def create_tables():
     Post.__table__.create(**args)
 
     Follow.__table__.create(**args)
+
+    Comment.__table__.create(**args)
+
 
 create_tables()
 
