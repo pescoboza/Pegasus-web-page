@@ -113,6 +113,8 @@ class User(UserMixin, db.Model):
     followers = db.relationship("Follow", foreign_keys=[Follow.followed_id], backref=db.backref("followed", lazy="joined"),
                                 lazy="dynamic", cascade="all, delete-orphan")
 
+    comments = db.relationship("Comment", backref="author", lazy="dynamic")
+
     @staticmethod
     def add_self_follows():
         for user in User.query.all():
