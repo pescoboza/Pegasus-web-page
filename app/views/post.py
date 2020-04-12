@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, current_app
+from flask import render_template, flash, redirect, url_for, current_app, request
 from flask_login import current_user
 from ..models.post import Post
 from .. import app, db
@@ -9,7 +9,7 @@ from ..models.comment import Comment
 @app.route("/post/<int:id>", methods=["GET", "POST"])
 def post(id):
     post = Post.query.get_or_404(id)
-    form = CommentForm
+    form = CommentForm()
 
     if form.validate_on_submit():
         comment = Comment(body=form.body.data, post=post,
