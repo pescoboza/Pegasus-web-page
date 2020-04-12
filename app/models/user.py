@@ -179,6 +179,8 @@ class User(UserMixin, db.Model):
         if self.email != None and self.avatar_hash == None:
             self.avatar_hash = self.gravatar_hash()
 
+        self.follow(self)
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):
