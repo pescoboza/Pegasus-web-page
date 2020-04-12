@@ -15,7 +15,6 @@ def blog():
     except AttributeError:
         can_write_articles = False
 
-    # TODO: Add role of blogger
     if can_write_articles and form.validate_on_submit():
         post = Post(body=form.body.data,
                     author=current_user._get_current_object())
@@ -24,9 +23,20 @@ def blog():
         return redirect(url_for("blog"))
 
     page = request.args.get("page", 1, type=int)
+    
+    show_followed = False
+    query = None
+    if current_user.is_authenticated:
+        show_followed = bool(request.cookies.get("show_followed", ''))
+    
+    if show_followed:
+        query = current_user.followed_posts
+    else:
+        query = Post.query
+
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config["APP_POSTS_PER_PAGE"],
         error_out=False)
     posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template("blog.html", form=form, posts=posts, pagination=pagination)
+    return render_template("blog.html", form=form, posts=posts, show_followed=show_followed, pagination=pagination)
     
