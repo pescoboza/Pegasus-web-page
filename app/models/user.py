@@ -112,6 +112,9 @@ class User(UserMixin, db.Model):
 
     followers = db.relationship("Follow", foreign_keys=[Follow.followed_id], backref=db.backref("followed", lazy="joined"),
                                 lazy="dynamic", cascade="all, delete-orphan")
+    @property
+    def followed_posts(self):
+        return Post.query.join(Follow, Follow.followed_id == Post.author_id).filter(Follow.follower_id == self.id)
 
     def follow(self, user):
         if not self.is_following(user):
