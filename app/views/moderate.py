@@ -1,4 +1,4 @@
-from flask import request, render_template, current_app
+from flask import redirect, url_for,request, render_template, current_app
 from flask_login import login_required
 from .. import app, db
 from ..models.user import Permission
@@ -24,7 +24,8 @@ def moderate():
 def moderate_disable(id):
     comment = Comment.query.get_or_404(id)
     comment.disabled = True
-    db.session.commit(comment)
+    db.session.add(comment)
+    db.session.commit()
     return redirect(url_for("moderate", page=request.args.get("page", 1, type=int)))
 
 @app.route("/moderate/enable/<int:id>")
@@ -33,5 +34,6 @@ def moderate_disable(id):
 def moderate_enable(id):
     comment = Comment.query.get_or_404(id)
     comment.disabled = False
-    db.session.commit(comment)
+    db.session.add(comment)
+    db.session.commit()
     return redirect(url_for("moderate", page=request.args.get("page", 1, type=int)))
