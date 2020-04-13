@@ -31,6 +31,7 @@ from .models.post import Post
 from .models.follow import Follow
 from .models.comment import Comment
 from .views import *
+from .views.error_handle import *
 from .views.request_password_change import *
 from .views.login import *
 from .views.logout import *

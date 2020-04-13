@@ -1,6 +1,6 @@
 from flask import request, render_template, current_app
 from flask_login import login_required
-from .. import app
+from .. import app, db
 from ..models.user import Permission
 from ..models.comment import Comment
 from ..decorators import permission_required
