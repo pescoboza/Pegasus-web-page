@@ -1,4 +1,5 @@
 <ul class="comments">
+    {% for comment in comments %}
     <li class="comment">
         <div class="comment-thumbnail">
             <a href="{{url_for('.user', username=comment.author.username)}}">
@@ -15,7 +16,7 @@
                 {% endif %}
                 {% if moderate or not comment.disabled %}
                 {{comment.body}}
-                {{% endif %}}
+                {% endif %}
             </div>
             {% if moderate %}
             <br>
@@ -24,6 +25,7 @@
                 class="btn btn-default btn-xs">Enable</a>
             {% else %}
             <a href="{{url_for('.moderate_disable', id=comment.id, page=page)}}" class="btn btn-danger btn-xs"></a>
+            {% endif %}
             {% endif %}
         </div>
     </li>
