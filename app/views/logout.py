@@ -1,12 +1,8 @@
-import gc
-from flask import flash, redirect, url_for, session
+from flask import redirect, url_for
+from flask_login import logout_user
 from .. import app
-from ..decorators import login_required
-
 
 @app.route("/logout")
-@login_required
 def logout():
-    session.clear()
-    gc.collect()
-    return redirect(url_for("/home"))
+    logout_user()
+    return redirect(url_for("index"))

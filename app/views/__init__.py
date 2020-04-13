@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, flash
 from ..models.user import User
 from .. import app, db
 from ..forms.login_form import LoginForm
@@ -8,20 +8,6 @@ from .login import *
 from .user_confirmation import *
 from .register import *
 
-
-# ---------------------------------------------------
-# Helpers
-# ---------------------------------------------------
-class Button:
-    # To be used with:
-    """
-    <form action="{{button.action}}">
-        <input type="submit" value="{{button.value}}">
-    </form>
-    """
-    def __init__(self, value, action):
-        self.link = link
-        self.text = text
 
 def cover_email(email,num_visible_chars=1, replacement_char='*'):
     at = email.find('@')
@@ -33,6 +19,9 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
     
     return  uncovered_part + (len(uname)-num_visible_chars)*replacement_char + not_uname
         
+# 30 days
+COOKIE_DURATION = 30 * 24 * 60**2
+
 # ---------------------------------------------------
 # Index page
 # ---------------------------------------------------
@@ -41,13 +30,3 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
 @app.route("/home")
 def index():
     return render_template("index.html")
-
-
-
-# ---------------------------------------------------
-# Profile page
-# ---------------------------------------------------
-@app.route("/user/<username>")
-def profile(username):
-    return render_template("profile.html")
-

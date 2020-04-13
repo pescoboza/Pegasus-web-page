@@ -1,27 +1,25 @@
 from get_local_host import get_local_host
 
 class Config:
-
-    # General config
-    FLASK_ENV = "development"
-    TESTING = True
     DEBUG = True
-    SECRET_KEY = "pegasus-dev-team"  # TODO: Add safer secret key.
-    # TODO: Add security password salt
-    SECURITY_PASSWORD_SALT = '\0'
-    
-    # Database
+    TESTING = False
+    SECRET_KEY = "pegasus-dev-team"
+    SECURITY_PASSWORD_SALT = "Den Minecraft ist kaputt!"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # TODO: Change database URI to Heroku database.
     SQLALCHEMY_DATABASE_URI = get_local_host()
-
-    # Email settings
-    # TODO: Fill in email settings
-    # https://realpython.com/handling-email-confirmation-in-flask/#add-email-confirmation
-    MAIL_SERVER = "smpt.gmail.com"
+    MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
+    MAIL_SUPPRESS_SEND = False
+    MAIL_ASCII_ATTACHMENTS = True
     MAIL_USERNAME = "pegasus.csn@gmail.com"
+    MAIL_DEFAULT_SENDER = "pegasus.csn@gmail.com"
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
 
+    APP_ADMIN = "lolo23jhon@gmail.com"
+    
+    # Pagination
+    APP_POSTS_PER_PAGE = 20
+    APP_FOLLOWERS_PER_PAGE = 20
+    APP_COMMENTS_PER_PAGE = 20

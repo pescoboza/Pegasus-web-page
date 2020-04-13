@@ -1,23 +1,7 @@
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
-    <title>PEGASUS</title>
-</head>
-
-<body>
-    <h1>PEGASUS</h1>
-    {% if user %}
-    <!--This is a placeholder for development.-->
-    <h2>Logged in as {{user.username}}</h2>
-    {% else %}
-    <a href="/login">Login</a>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo soluta omnis impedit explicabo molestias quam
-        recusandae laboriosam suscipit dolorum at repellendus facere minus sit id, iusto ea maiores dolore odit!</p>
-    {% endif %}
-    <img src="../static/pegasus-logo.png" width="250px" alt="Pegasus Logo">
-</body>
-
-</html>
+{% block content %}
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo soluta omnis impedit explicabo molestias quam
+    recusandae laboriosam suscipit dolorum at repellendus facere minus sit id, iusto ea maiores dolore odit!</p>
+<img src="../static/pegasus-logo.png" width="250px" alt="Pegasus Logo">
+{% endblock %}
