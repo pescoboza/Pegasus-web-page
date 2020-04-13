@@ -2,4 +2,18 @@
 
 {% block content %}
 {% include "_posts.html"%}
+<h4 id="comments">Comments</h4>
+{% if current_user.can(Permission.COMMENT) and form %}
+<div class="comment-form">
+    {{form.csrf_token}}
+    {{form.body}}
+    {{form.submit}}
+</div>
+{% endif %}
+{% include "_comments.html" %}
+{% if pagination %}
+<div class="pagination">
+    {{macros.pagination_widget(pagination, ".post", fragment="#comments", id=posts[0].id)}}
+</div>
+{% endif %}
 {% endblock %}
