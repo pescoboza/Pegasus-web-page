@@ -20,7 +20,7 @@ def moderate():
 
 @app.route("/moderate/disable/<int:id>")
 @login_required
-@permission_required
+@permission_required(Permission.MODERATE)
 def moderate_disable(id):
     comment = Comment.query.get_or_404(id)
     comment.disabled = True
@@ -29,7 +29,7 @@ def moderate_disable(id):
 
 @app.route("/moderate/enable/<int:id>")
 @login_required
-@permission_required
+@permission_required(Permission.MODERATE)
 def moderate_enable(id):
     comment = Comment.query.get_or_404(id)
     comment.disabled = False
