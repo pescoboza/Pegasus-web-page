@@ -17,6 +17,7 @@ app.config.from_object("config.Config")
 
 login = LoginManager(app)
 login.login_view = "login"
+
 mail = Mail(app)
 moment = Moment(app)
 
@@ -25,9 +26,10 @@ db = SQLAlchemy(app)
 # ---------------------------------------------------
 # Main function
 # ---------------------------------------------------
-from .models.user import User, Role, Permission
+from .models.user import AnonymousUser, User, Role, Permission
 from .models.post import Post
 from .models.follow import Follow
+from .models.comment import Comment
 from .views import *
 from .views.request_password_change import request_password_change
 from .views.login import login
@@ -56,6 +58,9 @@ def create_tables():
     Post.__table__.create(**args)
 
     Follow.__table__.create(**args)
+
+    Comment.__table__.create(**args)
+
 
 create_tables()
 
