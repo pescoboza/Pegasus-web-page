@@ -31,19 +31,20 @@ from .models.post import Post
 from .models.follow import Follow
 from .models.comment import Comment
 from .views import *
-from .views.request_password_change import request_password_change
-from .views.login import login
-from .views.logout import logout
-from .views.chatbot import chatbot
-from .views.blog import blog
-from .views.edit_profile import edit_profile
-from .views.edit_profile_admin import edit_profile_admin
-from .views.register import register
-from .views.post import post
-from .views.edit import edit
-from .views.follow import follow
-from .views.followers import followers
-from .views.followed_by import followed_by   
+from .views.request_password_change import *
+from .views.login import *
+from .views.logout import *
+from .views.chatbot import *
+from .views.blog import *
+from .views.edit_profile import *
+from .views.edit_profile_admin import *
+from .views.register import *
+from .views.post import *
+from .views.edit import *
+from .views.follow import *
+from .views.followers import *
+from .views.followed_by import *
+from .views.moderate import *
 
 app.jinja_env.globals.update(Permission=Permission)
 
@@ -66,10 +67,3 @@ create_tables()
 
 if __name__ == "__main__":
     app.run()
-
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
-#        TODO: GET THE BLOG WORKING           #
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
-# - Figure out the creation order of data tables.
-#       - Solve role being of type None in User objects.
-#       - This automatically redirects logged in users to the index.
