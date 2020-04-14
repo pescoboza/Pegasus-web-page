@@ -1,5 +1,5 @@
 from flask import make_response, redirect, url_for
-from flask_login import login_required
+from flask_login import fresh_login_required
 from .. import app
 from . import COOKIE_DURATION
 

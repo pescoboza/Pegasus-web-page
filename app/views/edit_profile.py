@@ -1,11 +1,11 @@
 from flask import flash, render_template, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import fresh_login_required, current_user
 from .. import app
 from .user import User
 from ..forms.edit_profile_form import EditProfileForm
 
 @app.route("/edit-profile", methods=["GET","POST"])
-@login_required
+@fresh_login_required
 def edit_profile():
     form = EditProfileForm()
 

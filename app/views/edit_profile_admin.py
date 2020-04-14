@@ -1,12 +1,12 @@
 from flask import flash, redirect, url_for
-from flask_login import login_required
+from flask_login import fresh_login_required
 from ..decorators import admin_required
 from .. import app, db
 from ..models.user import User
 from ..forms.edit_profile_admin_form import EditProfileAdminForm
 
 @app.route("/edit-profile/<int:id>", methods=["GET", "POST"])
-@login_required
+@fresh_login_required
 @admin_required
 def edit_profile_admin(id):
     user = User.query.get_or_404(id)

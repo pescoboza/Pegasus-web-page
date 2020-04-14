@@ -1,11 +1,11 @@
 from flask import  flash, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import fresh_login_required, current_user
 from .. import app, db
 from ..decorators import permission_required
 from ..models.user import Permission, User
 
 @app.route("/follow/<username>", methods=["GET", "POST"])
-@login_required
+@fresh_login_required
 @permission_required(Permission.FOLLOW)
 def follow(username):
     user = User.query.filter_by(username=username).first()

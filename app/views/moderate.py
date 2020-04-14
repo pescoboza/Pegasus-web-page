@@ -1,5 +1,5 @@
 from flask import redirect, url_for,request, render_template, current_app
-from flask_login import login_required
+from flask_login import fresh_login_required
 from .. import app, db
 from ..models.user import Permission
 from ..models.comment import Comment
@@ -7,7 +7,7 @@ from ..decorators import permission_required
 
 
 @app.route("/moderate")
-@login_required
+@fresh_login_required
 @permission_required(Permission.MODERATE)
 def moderate():
     page = request.args.get("page", 1, type=int)
@@ -19,7 +19,7 @@ def moderate():
 
 
 @app.route("/moderate/disable/<int:id>")
-@login_required
+@fresh_login_required
 @permission_required(Permission.MODERATE)
 def moderate_disable(id):
     comment = Comment.query.get_or_404(id)
@@ -29,7 +29,7 @@ def moderate_disable(id):
     return redirect(url_for("moderate", page=request.args.get("page", 1, type=int)))
 
 @app.route("/moderate/enable/<int:id>")
-@login_required
+@fresh_login_required
 @permission_required(Permission.MODERATE)
 def moderate_enable(id):
     comment = Comment.query.get_or_404(id)
