@@ -17,9 +17,15 @@ class Config:
     MAIL_DEFAULT_SENDER = "pegasus.csn@gmail.com"
     MAIL_PASSWORD = "std::cout<<\"HelloWorld!\"<<std::endl;"
 
-    APP_ADMIN = "lolo23jhon@gmail.com"
+    
     
     # Pagination
     APP_POSTS_PER_PAGE = 20
     APP_FOLLOWERS_PER_PAGE = 20
     APP_COMMENTS_PER_PAGE = 20
+
+    APP_ADMINISTRATORS = ["lolo23jhon@gmail.com"]
+    APP_MODERATORS = []
+
+
+

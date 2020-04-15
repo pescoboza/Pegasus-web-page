@@ -16,14 +16,6 @@ class Permission:
     ADMIN = 32
 
 
-MODERATORS = [
-
-]
-
-ADMINISTRATORS =[
-
-]
-
 ROLES = {
     "user": {
         "permissions": [Permission.FOLLOW, Permission.COMMENT], #Permission.WRITE_ARTICLES],
@@ -189,9 +181,9 @@ class User(UserMixin, db.Model):
         self.avatar_hash = None
         self.role = None
 
-        if self.email == app.config["APP_ADMIN"] or self.email in ADMINISTRATORS:
+        if self.email in app.config["APP_ADMINISTRATORS"]:
             self.role = Role.query.filter_by(name="administrator").first()
-        elif self.email in MODERATORS:
+        elif self.email in app.config["APP_MODERATORS"]:
             self.role = Role.query.filter_by(name="moderator").first()
         elif self.role == None:
             self.role = Role.query.filter_by(default=True).first()
