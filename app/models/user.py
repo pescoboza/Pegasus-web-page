@@ -18,7 +18,7 @@ class Permission:
 
 ROLES = {
     "user": {
-        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES],
+        "permissions": [Permission.FOLLOW, Permission.COMMENT], #Permission.WRITE_ARTICLES],
         "description": "Basic permissions to write articles and comments and to follow othre users. This is the deault for new users."
     },
     "moderator": {
