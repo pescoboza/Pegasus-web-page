@@ -24,7 +24,7 @@ class Config:
     APP_FOLLOWERS_PER_PAGE = 20
     APP_COMMENTS_PER_PAGE = 20
 
-    APP_ADMINISTRATORS = ["lolo23jhon@gmail.com"]
+    APP_ADMINISTRATORS = ["psebastian01@gmail.com", "javierlizarraga.b@hotmail.com", "A01251527@itesm.mx"]
     APP_MODERATORS = []
 
 
