@@ -1,12 +1,12 @@
 from flask import render_template, abort, redirect, url_for, flash
-from flask_login import login_required, current_user
+from flask_login import fresh_login_required, current_user
 from .. import app, db
 from ..models.user import User, Permission
 from ..models.post import Post
 from ..forms.post_form import PostForm
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
-@login_required
+@fresh_login_required
 def edit(id):
     post = Post.query.get_or_404(id)
 

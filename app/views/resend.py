@@ -4,7 +4,7 @@ from .send_email import send_email
 
 
 @app.route("/resend")
-@login_required
+@fresh_login_required
 
 # TODO: Edit email confirmation
 def resend_confirmation(subject):

@@ -18,7 +18,7 @@ class Permission:
 
 ROLES = {
     "user": {
-        "permissions": [Permission.FOLLOW, Permission.COMMENT, Permission.WRITE_ARTICLES],
+        "permissions": [Permission.FOLLOW, Permission.COMMENT], #Permission.WRITE_ARTICLES],
         "description": "Basic permissions to write articles and comments and to follow othre users. This is the deault for new users."
     },
     "moderator": {
@@ -181,9 +181,11 @@ class User(UserMixin, db.Model):
         self.avatar_hash = None
         self.role = None
 
-        if self.email == app.config["APP_ADMIN"]:
+        if self.email in app.config["APP_ADMINISTRATORS"]:
             self.role = Role.query.filter_by(name="administrator").first()
-        if self.role == None:
+        elif self.email in app.config["APP_MODERATORS"]:
+            self.role = Role.query.filter_by(name="moderator").first()
+        elif self.role == None:
             self.role = Role.query.filter_by(default=True).first()
 
         if self.email != None and self.avatar_hash == None:
