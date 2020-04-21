@@ -13,13 +13,13 @@ def user_confirmation(token):
     
     # TODO: Add setting to app for 404 page.
     user = db.session.query(User).filter(User.email == email).first_or_404()
-    if user != None and user.confirmed:
-        flash("Acount already confirmed. Please login.","success")
+    if user != None and user.is_authenticated:
+        flash("Acount already is_authenticated. Please login.","success")
         return redirect(url_for("login"))
     else:
-        user.confirmed = True
-        user.confirmed_on = datetime.now()
+        user.is_authenticated = True
+        user.authenticated_on = datetime.utcnow()
         db.session.add(user)
         db.session.commit()
-        flash("You succesfully confirmed your account. Thank you!","success")
+        flash("You succesfully authenticated your account. Thank you!","success")
     return redirect(url_for("index"))

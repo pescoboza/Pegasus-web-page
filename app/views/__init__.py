@@ -9,20 +9,6 @@ from .user_confirmation import *
 from .register import *
 
 
-# ---------------------------------------------------
-# Helpers
-# ---------------------------------------------------
-class Button:
-    # To be used with:
-    """
-    <form action="{{button.action}}">
-        <input type="submit" value="{{button.value}}">
-    </form>
-    """
-    def __init__(self, value, action):
-        self.link = link
-        self.text = text
-
 def cover_email(email,num_visible_chars=1, replacement_char='*'):
     at = email.find('@')
     uname = email[:at]
@@ -33,6 +19,9 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
     
     return  uncovered_part + (len(uname)-num_visible_chars)*replacement_char + not_uname
         
+# 30 days
+COOKIE_DURATION = 30 * 24 * 60**2
+
 # ---------------------------------------------------
 # Index page
 # ---------------------------------------------------
@@ -41,12 +30,3 @@ def cover_email(email,num_visible_chars=1, replacement_char='*'):
 @app.route("/home")
 def index():
     return render_template("index.html")
-
-
-
-# ---------------------------------------------------
-# Profile page
-# ---------------------------------------------------
-@app.route("/user/<username>")
-def profile(username):
-    return render_template("profile.html")

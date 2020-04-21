@@ -20,7 +20,7 @@ tensorflow = "*"
 numpy = "*"
 nltk = "*"
 flask-login = "*"
-requirements-txt = "*"
+flask-moment = "*"
 
 [requires]
 python_version = "3.7"
