@@ -1,3 +1,4 @@
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,7 @@
     {% endwith %}
     <link href="{{url_for('static', filename ='style.css')}}" rel="stylesheet">
 </head>
-
+{% endblock %}
 <body>
     {% block content %}{% endblock %}
 </body>
