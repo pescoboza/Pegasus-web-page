@@ -6,6 +6,6 @@ from ..validators import FIELD_LENGTHS as flen
 class LoginForm(FlaskForm):
     username = TextField(label="Username", validators=[InputRequired()])
     password = PasswordField(label="Password", validators=[InputRequired()])
-    remember = BooleanField()
+    remember = BooleanField(label="Remember Me")
 
     submit = SubmitField("Login")
