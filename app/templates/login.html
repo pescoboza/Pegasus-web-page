@@ -1,15 +1,27 @@
 {% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+html{ 
+background: url(../static/coding.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+</style>
+{% endblock %}
 
 {% block content %}
 <!-- Change form method -->
-<form class="Box" action="" method="POST">
+<form class="login_Box" action="" method="POST">
     <h1>Log In</h1>
     {{form.csrf_token}}
-    <div class="container">
+    
         {% if message %}
         <p class="auth-msg" name="login-auth-msg">{{message}}</p>
-        {% endif %}
-
+            {% endif %}
+    <div class="txtb">
         {{form.username.label}}
         {{form.username(placeholder="Enter Username")}}
 
@@ -21,7 +33,8 @@
         </ul>
         {% endif %}
         <br>
-
+    </div>
+    <div class="txtb">
         {{form.password.label}}
         {{form.password(placeholder="Enter Password")}}
         
@@ -33,19 +46,21 @@
         </ul>
         {% endif %}
         <br>
-
+    </div>
         {{form.submit}}
         <br>
 
         <!-- TODO: Add redirection for forgot password -->
         <label>
-            {{form.remember}}Remember me
+            {{form.remember.label}}
+            {{form.remember}}
             <br><span><a href="{{url_for('request_password_change')}}">Forgot password?</a></span>
         </label>
         <br>
 
         <!-- TODO: Add redirection for cancel login button -->
         <a href="{{url_for('index')}}"><button type="button" class="cancelbtn">Cancel</button></a>
-    </div>
+    
 </form>
-{% endblock %}
+
+{% endblock %} 
